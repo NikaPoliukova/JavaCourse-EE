@@ -7,10 +7,12 @@ import java.util.List;
 
 public interface UserService {
 
-  public List<User> findUsers();
+    List<User> findUsers();
 
-  public void addUser(User user);
+    void addUser(User user);
 
-  public User getUser(String name, String password);
+    User getUser(String name, String password);
+
+    List<User> findUserWithSearch(String name);
 
 }

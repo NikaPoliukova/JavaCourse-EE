@@ -8,6 +8,7 @@
     <title>Title</title>
 </head>
 <body>
+<h1>Hello, <%=session.getAttribute("username")%></h1>
 <h1>Users</h1>
 <table>
     <tr>

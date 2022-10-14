@@ -25,4 +25,8 @@ public class UserServiceImpl implements UserService {
     public User getUser(String name, String password) {
         return userRepository.getUser(name, password);
     }
+
+    public List<User> findUserWithSearch(String name) {
+        return userRepository.findUserWithSearch(name);
+    }
 }

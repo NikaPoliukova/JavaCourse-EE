@@ -1,7 +1,6 @@
 package example.servlet;
 
 
-
 import example.service.UserService;
 
 import javax.servlet.ServletConfig;
@@ -10,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -32,9 +32,11 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        if (userService.getUser(username, password)!=null){
-            resp.sendRedirect(req.getContextPath()+"/users");
-            //getServletContext().getRequestDispatcher("/users.jsp").forward(req, resp);
+        if (userService.getUser(username, password) != null) {
+            /// создание сессии (из-за входного параметра true)
+            HttpSession session = req.getSession(true);
+             session.setAttribute("username", username);
+            resp.sendRedirect(req.getContextPath() + "/users");
         }
     }
 }

@@ -14,9 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-
 @WebServlet("/users")
-public class UserServlet extends HttpServlet {
+public class UsersServlet extends HttpServlet {
 
     private UserService userService;
 
@@ -28,7 +27,14 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        final List<User> users = userService.findUsers();
+        String query = req.getQueryString();
+        final List<User> users;
+        if (query == null) {
+            users = userService.findUsers();
+        } else {
+            String res = query.substring(7);
+           users= userService.findUserWithSearch(res);
+        }
         req.setAttribute("users", users);
         getServletContext().getRequestDispatcher("/users.jsp").forward(req, resp);
     }

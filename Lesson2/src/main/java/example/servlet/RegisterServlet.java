@@ -16,7 +16,7 @@ import java.util.List;
 
 
 @WebServlet("/registration")
-public class RegisterUserServlet extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
     private UserService userService;
 
     @Override

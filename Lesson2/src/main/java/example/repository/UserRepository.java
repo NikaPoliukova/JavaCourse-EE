@@ -13,5 +13,7 @@ public interface UserRepository {
 
     void addUser(User user);
 
+    List<User> findUserWithSearch(String name);
+
 
 }
