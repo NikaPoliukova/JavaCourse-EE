@@ -12,7 +12,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     private static final String SHOW_All_USERS = "SELECT username,password FROM users";
     private static final String SHOW_USERS_SEARCH = "SELECT * FROM users WHERE username LIKE ?";
-    private final static String ADD_USER = "SELECT users(username, password) VALUES (?, ?)";
+    private final static String ADD_USER = "INSERT INTO users (username, password) VALUES (?,?)";
     private static final String FIND_USER = "SELECT * FROM users WHERE username=? AND password=?";
 
     public UserRepositoryImpl(Connection connection) {
