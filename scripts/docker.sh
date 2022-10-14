@@ -1,0 +1,2 @@
+docker run --rm  --name demo-postgres --network my_network -e POSTGRES_USER=postgres  -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=nikaDB -p 15432:5432 -v "C:\Users\nikan\IdeaProjects\Java-EE\Lesson2\dev-evn\postgres\init.sql:/docker-entrypoint-initdb.d/1-init.sql" postgres:13.4-alpine
+docker run --rm --name tomcat --network my_network -p 8080:8080 -v "C:\Users\nikan\IdeaProjects\JavaCourse-EE\target\JavaCourse-EE-1.0-SNAPSHOT.war:/usr/local/tomcat/webapps/servlet.war"  tomcat:9.0.53-jdk11-openjdk
