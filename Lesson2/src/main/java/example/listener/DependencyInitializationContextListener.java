@@ -5,7 +5,6 @@ import example.repository.UserRepository;
 import example.repository.UserRepositoryImpl;
 import example.service.UserService;
 import example.service.UserServiceImpl;
-
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;

@@ -29,7 +29,7 @@ public class UsersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String searchValue = req.getParameter("search");
         final List<User> users;
-        if (searchValue == null) {
+        if (searchValue == null){
             users = userService.findUsers();
         } else {
            users= userService.findUserWithSearch(searchValue);

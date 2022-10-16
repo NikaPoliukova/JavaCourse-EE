@@ -65,7 +65,6 @@ public class UserRepositoryImpl implements UserRepository {
         return user;
     }
 
-
     //проверка уникальности имя пользователя
     public boolean nameExistenceCheck(String name) {
         boolean result = false;
@@ -98,8 +97,6 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return registerUser;
     }
-    // получить пользователя
-
 
     public List<User> findUserWithSearch(String name) {
         final List<User> userList = new ArrayList<>();
