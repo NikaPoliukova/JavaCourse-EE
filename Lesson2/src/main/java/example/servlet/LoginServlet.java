@@ -33,10 +33,10 @@ public class LoginServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         if (userService.getUser(username, password) != null) {
-            /// создание сессии (из-за входного параметра true)
             HttpSession session = req.getSession(true);
-             session.setAttribute("username", username);
-            resp.sendRedirect(req.getContextPath() + "/users");
+            session.setAttribute("username", username);
+            req.getSession().setAttribute("isAuthorized", true);
+            resp.sendRedirect("users");
         }
     }
 }

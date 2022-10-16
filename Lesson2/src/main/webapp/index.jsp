@@ -5,6 +5,6 @@
     <title>$Title$</title>
   </head>
   <body>
-  <h1>Hello Lesson2</h1>
+  <h1>You are not logged in</h1>
   </body>
 </html>
