@@ -19,14 +19,25 @@ public class UserServiceImpl implements UserService {
     }
 
     public void addUser(User user) {
-        userRepository.addUser(user);
+        if (!nameExistenceCheck(user.getUserName())) {
+            userRepository.addUser(user);
+        } else {
+            throw new RuntimeException("This login is busy");
+        }
     }
 
-    public User getUser(String name, String password) {
-        return userRepository.getUser(name, password);
+    public boolean checkRegistered(String name, String password) {
+        return userRepository.checkRegistered(name, password);
+    }
+
+    public boolean nameExistenceCheck(String name) {
+        return userRepository.nameExistenceCheck(name);
     }
 
     public List<User> findUserWithSearch(String name) {
         return userRepository.findUserWithSearch(name);
+    }
+    public User getUser(String name, String password){
+        return userRepository.getUser(name, password);
     }
 }
