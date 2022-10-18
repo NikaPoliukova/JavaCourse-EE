@@ -28,7 +28,7 @@ public class DependencyInitializationContextListener implements ServletContextLi
             UserService userService = new UserServiceImpl(repository);
             sce.getServletContext().setAttribute("userService", userService);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException();
         }
     }
 

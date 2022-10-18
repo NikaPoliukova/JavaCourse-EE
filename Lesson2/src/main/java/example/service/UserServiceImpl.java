@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    public boolean checkRegistered(String name, String password) {
+    public boolean checkRegistered(String name, String password) throws SQLException {
         return userRepository.checkRegistered(name, password);
     }
 
