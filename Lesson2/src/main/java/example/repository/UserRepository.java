@@ -9,11 +9,13 @@ public interface UserRepository {
 
     List<User> findUsers();
 
-    User getUser(String name, String password);
+    boolean nameExistenceCheck(String name);
+
+    boolean checkRegistered(String name, String password);
 
     void addUser(User user);
 
     List<User> findUserWithSearch(String name);
 
-
+    User getUser(String name, String password);
 }

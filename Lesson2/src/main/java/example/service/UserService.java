@@ -11,8 +11,12 @@ public interface UserService {
 
     void addUser(User user);
 
-    User getUser(String name, String password);
+    boolean nameExistenceCheck(String name);
+
+    boolean checkRegistered(String name, String password);
 
     List<User> findUserWithSearch(String name);
+
+    User getUser(String name, String password);
 
 }

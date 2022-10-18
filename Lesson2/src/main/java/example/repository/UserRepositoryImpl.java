@@ -13,15 +13,15 @@ public class UserRepositoryImpl implements UserRepository {
     private static final String SHOW_All_USERS = "SELECT username,password FROM users";
     private static final String SHOW_USERS_SEARCH = "SELECT * FROM users WHERE username LIKE ?";
     private final static String ADD_USER = "INSERT INTO users (username, password) VALUES (?,?)";
-    private static final String FIND_USER = "SELECT * FROM users WHERE username=? AND password=?";
+    private static final String NAME_EXISTENCE_CHECK = "SELECT * FROM users WHERE username=?";
+    private static final String CHECK_REGISTERED = "SELECT * FROM users WHERE username=? AND password =?";
 
     public UserRepositoryImpl(Connection connection) {
         this.connection = connection;
     }
 
     public List<User> findUsers() {
-        try {
-            Statement stmt = connection.createStatement();
+        try (Statement stmt = connection.createStatement()) {
             ResultSet rs = stmt.executeQuery(SHOW_All_USERS);
             final List<User> userList = new ArrayList<User>();
             while (rs.next()) {
@@ -37,8 +37,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     public void addUser(User user) {
-        try {
-            PreparedStatement statement = connection.prepareStatement(ADD_USER);
+        try (PreparedStatement statement = connection.prepareStatement(ADD_USER)) {
             statement.setString(1, user.getUserName());
             statement.setString(2, user.getPassword());
             statement.executeUpdate();
@@ -47,9 +46,10 @@ public class UserRepositoryImpl implements UserRepository {
         }
     }
 
+    // получение  пользователя
     public User getUser(String name, String password) {
         User user = null;
-        try (PreparedStatement statement = connection.prepareStatement(FIND_USER)) {
+        try (PreparedStatement statement = connection.prepareStatement(CHECK_REGISTERED)) {
             statement.setString(1, name);
             statement.setString(2, password);
             try (ResultSet rs = statement.executeQuery()) {
@@ -65,10 +65,42 @@ public class UserRepositoryImpl implements UserRepository {
         return user;
     }
 
+    //проверка уникальности имя пользователя
+    public boolean nameExistenceCheck(String name) {
+        boolean result = false;
+        try (PreparedStatement statement = connection.prepareStatement(NAME_EXISTENCE_CHECK)) {
+            statement.setString(1, name);
+            try (ResultSet rs = statement.executeQuery()) {
+                if (rs.next()) {
+                    result = true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    //проверяет есть ли такой пользователь
+    public boolean checkRegistered(String name, String password) {
+        boolean registerUser = false;
+        try (PreparedStatement statement = connection.prepareStatement(CHECK_REGISTERED)) {
+            statement.setString(1, name);
+            statement.setString(2, password);
+            try (ResultSet rs = statement.executeQuery()) {
+                if (rs.next()) {
+                    registerUser = true;
+                }
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+        return registerUser;
+    }
+
     public List<User> findUserWithSearch(String name) {
         final List<User> userList = new ArrayList<>();
-        try {
-            PreparedStatement statement = connection.prepareStatement(SHOW_USERS_SEARCH);
+        try (PreparedStatement statement = connection.prepareStatement(SHOW_USERS_SEARCH)) {
             statement.setString(1, name + "%");
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {

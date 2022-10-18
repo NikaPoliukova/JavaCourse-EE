@@ -27,15 +27,14 @@ public class UsersServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        String query = req.getQueryString();
+        String searchValue = req.getParameter("search");
         final List<User> users;
-        if (query == null) {
+        if (searchValue == null){
             users = userService.findUsers();
         } else {
-            String res = query.substring(7);
-           users= userService.findUserWithSearch(res);
+           users= userService.findUserWithSearch(searchValue);
         }
         req.setAttribute("users", users);
-        getServletContext().getRequestDispatcher("/users.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/newusers.jsp").forward(req, resp);
     }
 }
