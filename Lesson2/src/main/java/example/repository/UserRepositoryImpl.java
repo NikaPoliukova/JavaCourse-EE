@@ -66,36 +66,24 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     //проверка уникальности имя пользователя
-    public boolean nameExistenceCheck(String name) {
-        boolean result = false;
+    public boolean isExistsByName(String name) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(NAME_EXISTENCE_CHECK)) {
             statement.setString(1, name);
             try (ResultSet rs = statement.executeQuery()) {
-                if (rs.next()) {
-                    result = true;
-                }
+                return rs.next();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return result;
     }
 
     //проверяет есть ли такой пользователь
-    public boolean checkRegistered(String name, String password) {
-        boolean registerUser = false;
+    public boolean checkRegistered(String name, String password) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(CHECK_REGISTERED)) {
             statement.setString(1, name);
             statement.setString(2, password);
             try (ResultSet rs = statement.executeQuery()) {
-                if (rs.next()) {
-                    registerUser = true;
-                }
+                return rs.next();
             }
-        } catch (SQLException se) {
-            se.printStackTrace();
         }
-        return registerUser;
     }
 
     public List<User> findUserWithSearch(String name) {
