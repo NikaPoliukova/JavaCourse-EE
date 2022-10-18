@@ -3,15 +3,16 @@ package example.service;
 
 import example.model.User;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface UserService {
 
     List<User> findUsers();
 
-    void addUser(User user);
+    void addUser(User user) throws SQLException;
 
-    boolean nameExistenceCheck(String name);
+    boolean isExistsByName(String name) throws SQLException;
 
     boolean checkRegistered(String name, String password);
 

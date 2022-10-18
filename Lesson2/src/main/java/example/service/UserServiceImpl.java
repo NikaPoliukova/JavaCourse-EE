@@ -4,6 +4,7 @@ package example.service;
 import example.model.User;
 import example.repository.UserRepository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
@@ -18,8 +19,8 @@ public class UserServiceImpl implements UserService {
         return userRepository.findUsers();
     }
 
-    public void addUser(User user) {
-        if (!nameExistenceCheck(user.getUserName())) {
+    public void addUser(User user) throws SQLException {
+        if (!isExistsByName(user.getUserName())) {
             userRepository.addUser(user);
         } else {
             throw new RuntimeException("This login is busy");
@@ -30,8 +31,8 @@ public class UserServiceImpl implements UserService {
         return userRepository.checkRegistered(name, password);
     }
 
-    public boolean nameExistenceCheck(String name) {
-        return userRepository.nameExistenceCheck(name);
+    public boolean isExistsByName(String name) throws SQLException {
+        return userRepository.isExistsByName(name);
     }
 
     public List<User> findUserWithSearch(String name) {

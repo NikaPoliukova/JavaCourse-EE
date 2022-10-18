@@ -35,6 +35,6 @@ public class UsersServlet extends HttpServlet {
            users= userService.findUserWithSearch(searchValue);
         }
         req.setAttribute("users", users);
-        getServletContext().getRequestDispatcher("/newusers.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/users.jsp").forward(req, resp);
     }
 }
