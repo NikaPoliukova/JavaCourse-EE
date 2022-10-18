@@ -14,7 +14,7 @@ public interface UserService {
 
     boolean isExistsByName(String name) throws SQLException;
 
-    boolean checkRegistered(String name, String password);
+    boolean checkRegistered(String name, String password) throws SQLException;
 
     List<User> findUserWithSearch(String name);
 
