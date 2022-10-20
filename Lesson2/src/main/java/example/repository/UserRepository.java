@@ -8,16 +8,15 @@ import java.util.List;
 
 public interface UserRepository {
 
+  List<User> findUsers();
 
-    List<User> findUsers();
+  boolean isExistsByName(String name) throws SQLException;
 
-    boolean isExistsByName(String name) throws SQLException;
+  boolean checkRegistered(String name, String password) throws SQLException;
 
-    boolean checkRegistered(String name, String password) throws SQLException;
+  void addUser(User user);
 
-    void addUser(User user);
+  List<User> findUserWithSearch(String name);
 
-    List<User> findUserWithSearch(String name);
-
-    User getUser(String name, String password);
+  User getUser(String name, String password);
 }
