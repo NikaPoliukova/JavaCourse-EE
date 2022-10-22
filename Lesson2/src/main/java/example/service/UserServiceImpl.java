@@ -3,10 +3,12 @@ package example.service;
 
 import example.model.User;
 import example.repository.UserRepository;
+import lombok.extern.log4j.Log4j2;
 
 import java.sql.SQLException;
 import java.util.List;
 
+@Log4j2
 public class UserServiceImpl implements UserService {
 
   private final UserRepository userRepository;
@@ -23,6 +25,7 @@ public class UserServiceImpl implements UserService {
     if (!isExistsByName(user.getUserName())) {
       userRepository.addUser(user);
     } else {
+      log.error("Ошибка при добавлении пользователя");
       throw new RuntimeException("This login already exists");
     }
   }

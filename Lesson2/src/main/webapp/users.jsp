@@ -1,6 +1,3 @@
-<%@ page import="java.util.List" %>
-<%@ page import="java.io.PrintWriter" %>
-<%@ page import="example.model.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -46,32 +43,52 @@
     <br class="row content">
     <div class="col-sm-8 text-left mainContent">
         <h1>Users</h1>
-
-        <div class="clear"></div>
     </div>
-
-    <br>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th> Registered users</th>
-
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="user" items="${users}">
-            <tr>
-                <td>${user.userName}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-    <br>
+    <div class="container p-30">
+        <div class="row">
+            <div class="col-md-12 main-datatable">
+                <div class="card_body">
+                </div>
+                <div class="overflow-x">
+                    <table style="width:100%;"
+                           id="filtertable"
+                           class="table cust-datatable dataTable no-footer"
+                           aria-describedby="users">
+                        <thead>
+                        <tr>
+                            <th style="min-width:50px;">ID</th>
+                            <th style="min-width:150px;">Name</th>
+                            <th style="min-width:150px;">Password</th>
+                            <th style="min-width:100px;">Date created</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${users}" var="user">
+                            <tr>
+                                <td>
+                                    <span class="text-primary"><c:out value="${user.id}" /></span>
+                                </td>
+                                <td>
+                                    <c:out value="${user.userName}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${user.password}"/>
+                                </td>
+                                <td>
+                                    <f:formatDate value="${user.createdDate}" pattern="dd-MM-YYYY HH:mm:ss"/>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
+</div>
 </body>
 </html>
-
 
 
 

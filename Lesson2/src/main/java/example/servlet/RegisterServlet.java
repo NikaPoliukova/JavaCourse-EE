@@ -2,6 +2,7 @@ package example.servlet;
 
 import example.model.User;
 import example.service.UserService;
+import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@Log4j2
 @WebServlet("/registration")
 public class RegisterServlet extends HttpServlet {
   private UserService userService;
@@ -34,6 +36,7 @@ public class RegisterServlet extends HttpServlet {
     try {
       userService.addUser(new User(userName, password));
     } catch (SQLException e) {
+      log.error("User in not added, error - " + e);
       e.printStackTrace();
     }
     getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
