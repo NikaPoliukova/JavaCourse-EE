@@ -16,11 +16,18 @@ import java.util.List;
 public class UserRepositoryImpl implements UserRepository {
   private final Connection connection;
 
-  private static final String SHOW_ALL_USERS = "SELECT id, username, password, createdDate FROM users";
+  private static final String SHOW_ALL_USERS = "SELECT user_id , username, password, createdDate FROM users";
   private static final String SHOW_USERS_SEARCH = "SELECT * FROM users WHERE username LIKE ?";
   private static final String ADD_USER = "INSERT INTO users (username, password) VALUES (?,?)";
   private static final String NAME_EXISTENCE_CHECK = "SELECT * FROM users WHERE username=?";
   private static final String CHECK_REGISTERED = "SELECT * FROM users WHERE username=? AND password =?";
+
+  private static final String ADD_FRIEND = "INSERT INTO friends (user_id, friend_id) VALUES (?,?)";
+  private static final String ADD_FRIEND_IN_REQUEST = "INSERT INTO invitations (user_id, friend_id) VALUES (?,?)";
+  private static final String DELETE_FRIEND = "INSERT INTO friends (friend_id) VALUES (?)";
+  private static final String DELETE_FRIEND_IN_REQUEST = "INSERT INTO invitations (friend_id) VALUES (?)";
+  private static final String SHOW_ALL_FRIENDS = "SELECT friend_id FROM friends WHERE user_id LIKE ?";
+  //private static final String SHOW_OUTGOING_REQUEST = "SELECT * FROM invitations";
 
   public UserRepositoryImpl(Connection connection) {
     this.connection = connection;
@@ -32,7 +39,8 @@ public class UserRepositoryImpl implements UserRepository {
       ResultSet rs = stmt.executeQuery(SHOW_ALL_USERS);
       final List<User> userList = new ArrayList<User>();
       while (rs.next()) {
-        final User user = new User(rs.getLong("id"), rs.getString("username"), rs.getString("password"), rs.getDate("createdDate"));
+        final User user = new User(rs.getLong("user_id"),
+            rs.getString("username"), rs.getString("password"), rs.getDate("createdDate"));
         userList.add(user);
         log.info("users found");
       }
@@ -65,7 +73,7 @@ public class UserRepositoryImpl implements UserRepository {
       try (ResultSet rs = statement.executeQuery()) {
         if (rs.next()) {
           user = new User(
-              rs.getLong("id"),
+              rs.getLong("userId"),
               rs.getString("username"),
               rs.getString("password"),
               rs.getTimestamp("createdDate"));
@@ -116,6 +124,82 @@ public class UserRepositoryImpl implements UserRepository {
       throw new RuntimeException(e);
     }
   }
+
+  //метод добавления друга исходящяя заявка
+  public void addFriend(User user1, User user2) {
+    try (PreparedStatement statement = connection.prepareStatement(ADD_FRIEND)) {
+      statement.setLong(1, user1.getUserId());
+      statement.setLong(2, user2.getUserId());
+      statement.executeUpdate();
+
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  //метод удаления друга
+  public void deleteFriend(User user) {
+    try (PreparedStatement statement = connection.prepareStatement(DELETE_FRIEND)) {
+      //нажата кнопка удалить
+      statement.setLong(1, user.getUserId());
+      statement.executeUpdate();
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  //метод добавление в таблицу заявок
+  public void addFriendInRequest(User user1, User user2) {
+    try (PreparedStatement statement = connection.prepareStatement(ADD_FRIEND_IN_REQUEST)) {
+      statement.setLong(1, user1.getUserId());
+      statement.setLong(2, user2.getUserId());
+      statement.executeUpdate();
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  //метод удаления в таблице заявок
+  public void deleteFriendInRequest(User user) {
+    try (PreparedStatement statement = connection.prepareStatement(DELETE_FRIEND_IN_REQUEST)) {
+      statement.setLong(1, user.getUserId());
+      statement.executeUpdate();
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  //показать всех друзей
+  public List<User> findAllFriends(Long userId) {
+    try (PreparedStatement statement = connection.prepareStatement(SHOW_ALL_FRIENDS)) {
+      final List<User> friendsList = new ArrayList<>();
+      statement.setLong(1, userId);
+      ResultSet rs = statement.executeQuery();
+      while (rs.next()) {
+        final User user = new User(rs.getString("username"));
+        friendsList.add(user);
+      }
+      return friendsList;
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+  //показать исходящие заявки
+
+  /*public List<User> showOutgoingRequests() {
+    try (Statement stmt = connection.createStatement()) {
+      ResultSet rs = stmt.executeQuery(SHOW_OUTGOING_REQUEST);
+      final List<User> friendsList = new ArrayList<User>();
+      while (rs.next()) {
+        final User user = new User(rs.getLong("friend_id"), rs.getDate("createdDate"));
+        friendsList.add(user);
+        log.info("users found");
+      }
+      return friendsList;
+    } catch (SQLException e) {
+      log.error("error during user found " + e);
+      throw new RuntimeException(e);
+    }*/
 }
 
 

@@ -3,6 +3,7 @@ package example.service;
 
 import example.model.User;
 import example.repository.UserRepository;
+import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 
 import java.sql.SQLException;
@@ -25,12 +26,13 @@ public class UserServiceImpl implements UserService {
     if (!isExistsByName(user.getUserName())) {
       userRepository.addUser(user);
     } else {
-      log.error("Ошибка при добавлении пользователя");
+      log.info("Пользователь существует");
       throw new RuntimeException("This login already exists");
     }
   }
 
-  public boolean checkRegistered(String name, String password) throws SQLException {
+  @SneakyThrows
+  public boolean checkRegistered(String name, String password) throws RuntimeException {
     return userRepository.checkRegistered(name, password);
   }
 

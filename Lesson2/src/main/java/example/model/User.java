@@ -13,7 +13,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class User {
-  Long id;
+  Long userId;
   String userName;
   String password;
   Date createdDate;

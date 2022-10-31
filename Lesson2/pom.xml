@@ -146,6 +146,11 @@
                 <version>3.3.2</version>
             </plugin>
             <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>8.5.13</version>
+            </plugin>
+            <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.19.1</version>
                 <dependencies>
@@ -188,11 +193,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <version>8.5.13</version>
-            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
@@ -259,13 +260,9 @@
                                 <DependencyConvergence/>
                                 <bannedDependencies>
                                     <excludes>
-                                        <!-- This should not exist as it will force SLF4J calls to be delegated to log4j -->
                                         <exclude>org.slf4j:slf4j-log4j12</exclude>
-                                        <!-- This should not exist as it will force SLF4J calls to be delegated to jul -->
                                         <exclude>org.slf4j:slf4j-jdk14</exclude>
-                                        <!-- Ensure only the slf4j binding for logback is on the classpath -->
                                         <exclude>log4j:log4j</exclude>
-                                        <!-- As recommended from the slf4j guide, exclude commons-logging -->
                                         <exclude>commons-logging:commons-logging</exclude>
                                     </excludes>
                                 </bannedDependencies>
@@ -276,7 +273,6 @@
             </plugin>
         </plugins>
     </build>
-
     <reporting>
         <plugins>
             <plugin>

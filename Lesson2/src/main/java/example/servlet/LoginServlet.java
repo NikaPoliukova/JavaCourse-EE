@@ -38,14 +38,11 @@ public class LoginServlet extends HttpServlet {
       if (userService.checkRegistered(username, password)) {
         HttpSession session = req.getSession(true);
         session.setAttribute("username", username);
-      } else {
-        req.setAttribute("error", "entered invalid login or password");
+        resp.sendRedirect("users");
       }
     } catch (SQLException e) {
+      resp.sendRedirect("users?error=" + e.getMessage());
       log.error("An error occurred while logging into account " + e);
-      e.printStackTrace();
     }
-    //как-то передать сообщение об ошибке на логин страницу)
-    resp.sendRedirect("users");
   }
 }

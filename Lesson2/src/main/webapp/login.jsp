@@ -103,10 +103,10 @@
     <div class="container signin">
     </div>
 </form>
-<c:if test="${error != null }">
+<c:if test="${param.error != null }">
     <div class="row" style="margin-top: 25px">
         <div class="alert alert-danger" role="alert">
-                ${error}
+                ${param.error}
         </div>
     </div>
 </c:if>
