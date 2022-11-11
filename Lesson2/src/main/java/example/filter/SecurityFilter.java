@@ -21,6 +21,7 @@ public class SecurityFilter implements Filter {
     final HttpServletRequest httpRequest = (HttpServletRequest) request;
     boolean isAuthorized = httpRequest.getSession().getAttribute("username") != null;
     if (!isAuthorized) {
+      //ПРИ ЛЮБОМ РАСКЛАДЕ ЗАХОДИТ НА СТРАНИЦУ ПОЛЬЗОВАТЕЛЕЙ.ИСПРАВИТЬ
       request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
       return;
     }

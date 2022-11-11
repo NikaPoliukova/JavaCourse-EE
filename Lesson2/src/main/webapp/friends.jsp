@@ -6,7 +6,7 @@
 <html>
 <head>
     <!-- Header -->
-    <jsp:include page= "header.jsp" />
+    <jsp:include page="header.jsp"/>
     <!-- Кодировка веб-страницы -->
     <meta charset="utf-8">
     <!-- Настройка viewport -->
@@ -56,7 +56,7 @@
 <div class="container-fluid text-center wrapper">
     <br class="row content">
     <div class="col-sm-8 text-left mainContent">
-        <h1>Users</h1>
+        <h1>Friends</h1>
     </div>
     <div class="container p-30">
         <div class="row">
@@ -72,28 +72,19 @@
                         <tr>
                             <th style="min-width:50px;">User id</th>
                             <th style="min-width:150px;">Name</th>
-                            <th style="min-width:150px;">Password</th>
-                            <th style="min-width:100px;">Date created</th>
-
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach items="${users}" var="user">
                             <tr>
                                 <td>
-                                    <span class="text-primary"><c:out value="${user.userId}" /></span>
+                                    <span class="text-primary"><c:out value="${user.userId}"/></span>
                                 </td>
                                 <td>
                                     <c:out value="${user.userName}"/>
                                 </td>
                                 <td>
-                                    <c:out value="${user.password}"/>
-                                </td>
-                                <td>
-                                    <f:formatDate value="${user.createdDate}" pattern="dd-MM-YYYY HH:mm:ss"/>
-                                </td>
-                                <td>
-                                    <button class="button">добавить в друзья</button>
+                                    <button class="button">отменить</button>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -107,6 +98,10 @@
 </div>
 </body>
 </html>
+
+
+
+
 
 
 

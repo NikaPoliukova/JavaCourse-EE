@@ -5,6 +5,7 @@ import example.repository.UserRepository;
 import example.repository.UserRepositoryImpl;
 import example.service.UserService;
 import example.service.UserServiceImpl;
+import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -13,6 +14,7 @@ import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+@Log4j2
 @WebListener
 public class DependencyInitializationContextListener implements ServletContextListener {
   @Override
@@ -29,6 +31,7 @@ public class DependencyInitializationContextListener implements ServletContextLi
       UserService userService = new UserServiceImpl(repository);
       sce.getServletContext().setAttribute("userService", userService);
     } catch (Exception e) {
+      log.fatal("не получилось создать соединение с базой данных по URL" + dbUrl);
       throw new RuntimeException(e);
     }
   }
@@ -39,6 +42,7 @@ public class DependencyInitializationContextListener implements ServletContextLi
       final Connection connection = (Connection) sce.getServletContext().getAttribute("connection");
       connection.close();
     } catch (SQLException e) {
+      log.error("servlet close error " + e);
       e.printStackTrace();
     }
   }

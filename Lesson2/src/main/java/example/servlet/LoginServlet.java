@@ -1,6 +1,7 @@
 package example.servlet;
 
 import example.service.UserService;
+import lombok.extern.log4j.Log4j2;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
+@Log4j2
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
   private UserService userService;
@@ -29,19 +31,18 @@ public class LoginServlet extends HttpServlet {
   }
 
   @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     String username = req.getParameter("username");
     String password = req.getParameter("password");
     try {
       if (userService.checkRegistered(username, password)) {
         HttpSession session = req.getSession(true);
         session.setAttribute("username", username);
+        resp.sendRedirect("users");
       }
     } catch (SQLException e) {
-      e.printStackTrace();
+      resp.sendRedirect("users?error=" + e.getMessage());
+      log.error("An error occurred while logging into account " + e);
     }
-    resp.sendRedirect("users"); //в данном слуучае мы всегда отправляем на страницу пользователей,
-    // если пользователь не валидный - его лучше перенаправить
-    // на отдельную страницу с ошибкой, либо как-то передать сообщение об ошибке на логин страницу)
   }
 }
