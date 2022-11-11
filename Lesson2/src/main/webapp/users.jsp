@@ -6,7 +6,7 @@
 <html>
 <head>
     <!-- Header -->
-    <jsp:include page= "header.jsp" />
+    <jsp:include page="header.jsp"/>
     <!-- Кодировка веб-страницы -->
     <meta charset="utf-8">
     <!-- Настройка viewport -->
@@ -28,6 +28,7 @@
             width: 100%;
             border: 1px solid #ddd;
         }
+
         .button {
             background-color: #4CAF50;
             border: none;
@@ -74,6 +75,7 @@
                             <th style="min-width:150px;">Name</th>
                             <th style="min-width:150px;">Password</th>
                             <th style="min-width:100px;">Date created</th>
+                            <th style="min-width:100px;">Action</th>
 
                         </tr>
                         </thead>
@@ -81,7 +83,7 @@
                         <c:forEach items="${users}" var="user">
                             <tr>
                                 <td>
-                                    <span class="text-primary"><c:out value="${user.userId}" /></span>
+                                    <span class="text-primary"><c:out value="${user.userId}"/></span>
                                 </td>
                                 <td>
                                     <c:out value="${user.userName}"/>
@@ -93,7 +95,12 @@
                                     <f:formatDate value="${user.createdDate}" pattern="dd-MM-YYYY HH:mm:ss"/>
                                 </td>
                                 <td>
-                                    <button class="button">добавить в друзья</button>
+                                    <c:if test='${sessionScope.get("userId") ne user.userId }'>
+                                        <form action="users" method="post">
+                                            <input type="hidden" name="addUserID" value="${user.userId}"/>
+                                            <button type="submit" class="button">Добавить в друзья</button>
+                                        </form>
+                                    </c:if>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -107,6 +114,3 @@
 </div>
 </body>
 </html>
-
-
-

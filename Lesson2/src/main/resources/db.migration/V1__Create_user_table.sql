@@ -7,7 +7,7 @@ CREATE TABLE users
 );
 
 INSERT INTO users ( username, password)
-VALUES ('user1', '123489');
+VALUES ('nika', '$2a$12$4k0YIr9v/ckNISWo7A3JVeZfo.YMM9Q6FBiK.VBexru3UYhYjSGWa');
 INSERT INTO users ( username, password)
 VALUES ('user2', '12454489');
 INSERT INTO users ( username, password)

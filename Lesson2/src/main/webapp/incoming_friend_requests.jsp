@@ -29,6 +29,15 @@
             border: 1px solid #ddd;
         }
 
+        th, td {
+            text-align: left;
+            padding: 16px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
         .button {
             background-color: #4CAF50;
             border: none;
@@ -41,15 +50,6 @@
             margin: 4px 2px;
             cursor: pointer;
         }
-
-        th, td {
-            text-align: left;
-            padding: 16px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2
-        }
     </style>
 </head>
 <body onload="active()">
@@ -57,7 +57,7 @@
 <div class="container-fluid text-center wrapper">
     <br class="row content">
     <div class="col-sm-8 text-left mainContent">
-        <h1>Friends</h1>
+        <h1>Incoming friend requests</h1>
     </div>
     <div class="container p-30">
         <div class="row">
@@ -73,21 +73,24 @@
                         <tr>
                             <th style="min-width:50px;">User id</th>
                             <th style="min-width:150px;">Name</th>
+                            <th style="min-width:150px;">Status</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${friends}" var="friend">
+                        <c:forEach items="${incomingFriendRequests}" var="user">
                             <tr>
                                 <td>
-                                    <span class="text-primary"><c:out value="${friend.userId}"/></span>
+                                    <span class="text-primary"><c:out value="${user.userId}"/></span>
                                 </td>
                                 <td>
-                                    <c:out value="${friend.userName}"/>
+                                    <c:out value="${user.userName}"/>
                                 </td>
                                 <td>
-                                    <form action="friends" method="post">
-                                        <input type="hidden" name="targetUserId" value="${friend.userId}"/>
-                                        <button type="submit" class="button">Удалить</button>
+                                    <form action="incoming_friend_requests" method="post">
+                                        <input type="hidden" name="addUserID" value="${user.userId}"/>
+                                        <button type="submit" class="button">Добавить</button>
+                                        <input type="hidden" name="cancelUserID" value="${user.userId}"/>
+                                        <button type="submit" class="button">Отменить</button>
                                     </form>
                                 </td>
                             </tr>
@@ -102,10 +105,3 @@
 </div>
 </body>
 </html>
-
-
-
-
-
-
-

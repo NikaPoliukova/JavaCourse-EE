@@ -136,6 +136,11 @@
             <version>1.17.5</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>at.favre.lib</groupId>
+            <artifactId>bcrypt</artifactId>
+            <version>0.9.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -234,6 +239,11 @@
                         <artifactId>spotbugs</artifactId>
                         <version>4.7.1</version>
                     </dependency>
+                    <dependency>
+                        <groupId>at.favre.lib</groupId>
+                        <artifactId>bcrypt</artifactId>
+                        <version>0.9.0</version>
+                    </dependency>
                 </dependencies>
                 <executions>
                     <execution>
@@ -287,5 +297,4 @@
             </plugin>
         </plugins>
     </reporting>
-
 </project>
