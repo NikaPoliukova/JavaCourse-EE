@@ -2,33 +2,31 @@ package example.servlet;
 
 
 import example.model.User;
+import example.service.HashPassService;
 import example.service.UserService;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 
-import java.nio.charset.StandardCharsets;
-
+import javax.servlet.ServletConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.ServletConfig;
-
-import at.favre.lib.crypto.bcrypt.BCrypt;
-import at.favre.lib.crypto.bcrypt.BCrypt.Result;
 
 
 @Log4j2
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
   private UserService userService;
+  private HashPassService hashPassService;
 
   @SneakyThrows
   @Override
   public void init(ServletConfig config) {
     super.init(config);
     userService = (UserService) config.getServletContext().getAttribute("userService");
+    hashPassService = (HashPassService) config.getServletContext().getAttribute("hashPassService");
   }
 
   @SneakyThrows
@@ -43,18 +41,14 @@ public class LoginServlet extends HttpServlet {
     String username = req.getParameter("username");
     String password = req.getParameter("password");
     String hashPass = userService.getUserPassword(username);
-    final Result verify = BCrypt.verifyer()
-        .verify(password.getBytes(StandardCharsets.UTF_8), hashPass.getBytes());
-    System.out.printf("");
-    if (verify.verified) {
-      //if (userService.checkRegistered(username, password)) {
+    if (hashPassService.verify(password, hashPass)) {
       User user = userService.getUser(username, hashPass);
-      HttpSession session = req.getSession(true);
+      HttpSession session = req.getSession();
       session.setAttribute("username", username);
       session.setAttribute("userId", user.getUserId());
       resp.sendRedirect("users");
     } else {
-      resp.sendRedirect("users?error=" + "incorrect password");
+      resp.sendRedirect("login?error=" + " enter incorrect password");
       log.error("An error occurred while logging into account ");
     }
   }

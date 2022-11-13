@@ -1,6 +1,7 @@
 package example.servlet;
 
 import example.model.User;
+import example.service.FriendsService;
 import example.service.UserService;
 
 import java.io.IOException;
@@ -18,11 +19,13 @@ import java.util.List;
 public class UsersServlet extends HttpServlet {
 
   private UserService userService;
+  private FriendsService friendsService;
 
   @Override
   public void init(ServletConfig config) throws ServletException {
     super.init(config);
     userService = (UserService) config.getServletContext().getAttribute("userService");
+    friendsService = (FriendsService) config.getServletContext().getAttribute("friendsService");
   }
 
   @Override
@@ -43,7 +46,7 @@ public class UsersServlet extends HttpServlet {
     long userId = (long) req.getSession().getAttribute("userId");
     if (req.getParameter("addUserID") != null) {
       long addUserID = Long.parseLong(req.getParameter("addUserID"));
-      userService.createFriendRequest(userId, addUserID);
+      friendsService.createFriendRequest(userId, addUserID);
       resp.sendRedirect("users");
     }
   }

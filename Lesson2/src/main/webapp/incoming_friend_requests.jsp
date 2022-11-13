@@ -86,9 +86,13 @@
                                     <c:out value="${user.userName}"/>
                                 </td>
                                 <td>
-                                    <form action="incoming_friend_requests" method="post">
+                                    <form action="incoming_and_added_friend_requests" method="post">
                                         <input type="hidden" name="addUserID" value="${user.userId}"/>
                                         <button type="submit" class="button">Добавить</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="incoming_and_cancel_friend_requests" method="post">
                                         <input type="hidden" name="cancelUserID" value="${user.userId}"/>
                                         <button type="submit" class="button">Отменить</button>
                                     </form>

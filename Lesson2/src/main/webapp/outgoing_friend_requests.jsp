@@ -83,7 +83,6 @@
                                 </td>
                                 <td>
                                     <c:out value="${user.userName}"/>
-
                                 </td>
                                 <td>
                                     <form action="outgoing_friend_requests" method="post">
