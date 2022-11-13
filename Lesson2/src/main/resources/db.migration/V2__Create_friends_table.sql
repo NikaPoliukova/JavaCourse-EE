@@ -3,7 +3,7 @@ CREATE TABLE friends
     id             BIGSERIAL NOT NULL UNIQUE,
     source_user_id BIGINT    NOT NULL,
     target_user_id BIGINT    NOT NULL,
-    status         VARCHAR DEFAULT 'new',
+    status         VARCHAR DEFAULT 'NEW',
     created_at     TIMESTAMP NOT NULL DEFAULT now(),
     update_at      TIMESTAMP NOT NULL DEFAULT now(),
 
