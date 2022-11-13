@@ -37,10 +37,14 @@ public class UsersServlet extends HttpServlet {
     req.setAttribute("users", users);
     getServletContext().getRequestDispatcher("/users.jsp").forward(req, resp);
   }
-  //если на странице нажимается кнопка (добавить)нужно добавить в таблицу(заявки исходящие)этот запрос
-    //if (isNoNFound)
-  // {добавление в список друзей}
-  //удалить из исходящих заявок
-  //else {
-  //удалить из исходящих заявок}
+
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    long userId = (long) req.getSession().getAttribute("userId");
+    if (req.getParameter("addUserID") != null) {
+      long addUserID = Long.parseLong(req.getParameter("addUserID"));
+      userService.createFriendRequest(userId, addUserID);
+      resp.sendRedirect("users");
+    }
+  }
 }

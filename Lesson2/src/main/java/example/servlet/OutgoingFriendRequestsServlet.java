@@ -1,5 +1,6 @@
-/*package example.servlet;
+package example.servlet;
 
+import example.model.User;
 import example.service.UserService;
 
 import javax.servlet.ServletConfig;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/outgoing_friend_requests")
 public class OutgoingFriendRequestsServlet extends HttpServlet {
@@ -23,14 +25,21 @@ public class OutgoingFriendRequestsServlet extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    super.doGet(req, resp);
-
-    //получить запрос с сервлета usersServlet
-
-    //удалить из таблицы исходящие заявки
-    //if (isNotFound){
-    //добавить в таблицу friends
-
-
+    List<User> outgoingFriendRequest;
+    long userId = (long) req.getSession().getAttribute("userId");
+    outgoingFriendRequest = userService.findOutgoingFriendsRequests(userId);
+    req.setAttribute("outgoingFriendRequest", outgoingFriendRequest);
+    getServletContext().getRequestDispatcher("/outgoing_friend_requests.jsp").forward(req, resp);
   }
-}*/
+
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    long userId = (long) req.getSession().getAttribute("userId");
+    if (req.getParameter("cancelUserID") != null) {
+      long cancelUserID = Long.parseLong(req.getParameter("cancelUserID"));
+      userService.cancelFriendship(userId, cancelUserID);
+      resp.sendRedirect("outgoing_friend_requests");
+    }
+  }
+}
+

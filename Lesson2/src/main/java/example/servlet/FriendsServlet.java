@@ -1,4 +1,4 @@
-/*package example.servlet;
+package example.servlet;
 
 import example.model.User;
 import example.service.UserService;
@@ -22,15 +22,25 @@ public class FriendsServlet extends HttpServlet {
     super.init(config);
     userService = (UserService) config.getServletContext().getAttribute("userService");
   }
+
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    super.doGet(req, resp);
-
-    final List<User> friends;
-    friends = .findFriends();//создать метод для поиска друзей
+    List<User> friends;
+    long userId = (long) req.getSession().getAttribute("userId");
+    friends = userService.findAllFriends(userId);
     req.setAttribute("friends", friends);
     getServletContext().getRequestDispatcher("/friends.jsp").forward(req, resp);
   }
 
-
-}*/
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    final long sourceUserId = (long) req.getSession().getAttribute("userId");
+    final long targetUserId = Long.parseLong(req.getParameter("targetUserId"));
+    try {
+      userService.cancelFriendship(sourceUserId, targetUserId);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    resp.sendRedirect("friends");
+  }
+}

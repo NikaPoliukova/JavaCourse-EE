@@ -1,8 +1,15 @@
 CREATE TABLE friends
 (
-    user_id     BIGINT    NOT NULL,
-    friend_id   BIGINT    NOT NULL,
-    createdDate TIMESTAMP NOT NULL DEFAULT now(),
+    id             BIGSERIAL NOT NULL UNIQUE,
+    source_user_id BIGINT    NOT NULL,
+    target_user_id BIGINT    NOT NULL,
+    status         VARCHAR DEFAULT 'new',
+    created_at     TIMESTAMP NOT NULL DEFAULT now(),
+    update_at      TIMESTAMP NOT NULL DEFAULT now(),
 
-    PRIMARY KEY (user_id, friend_id)
+    PRIMARY KEY (id)
 );
+INSERT INTO friends (source_user_id, target_user_id)
+VALUES (2, 1);
+INSERT INTO friends (source_user_id, target_user_id)
+VALUES (1, 3);
