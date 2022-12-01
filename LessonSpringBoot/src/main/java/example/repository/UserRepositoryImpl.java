@@ -24,7 +24,7 @@ public class UserRepositoryImpl implements UserRepository {
   private static final String SHOW_USERS_SEARCH = "SELECT * FROM users WHERE username LIKE ?";
   private static final String ADD_USER = "INSERT INTO users (username, password) VALUES (?,?)";
   private static final String NAME_EXISTENCE_CHECK = "SELECT * FROM users WHERE username=?";
-  private static final String CHECK_REGISTERED = "SELECT * FROM users WHERE username=? AND password =?";
+  private static final String GET_USER = "SELECT * FROM users WHERE username=? AND password =?";
 
   public List<User> findUsers() {
     log.info("started looking for all users");
@@ -32,8 +32,8 @@ public class UserRepositoryImpl implements UserRepository {
       ResultSet rs = stmt.executeQuery(SHOW_ALL_USERS);
       final List<User> userList = new ArrayList<User>();
       while (rs.next()) {
-        final User user = new User(rs.getLong("user_id"),
-            rs.getString("username"), rs.getString("password"), rs.getDate("createdDate"));
+        final User user = new User(rs.getLong("user_id"), rs.getString("username"),
+            rs.getString("password"), rs.getDate("createdDate"));
         userList.add(user);
         log.info("users found");
       }
@@ -60,7 +60,7 @@ public class UserRepositoryImpl implements UserRepository {
   public User getUser(String name, String password) {
     log.info("started getting all the data about the user Username=[{}] " + name);
     User user = null;
-    try (PreparedStatement statement = connection.prepareStatement(CHECK_REGISTERED)) {
+    try (PreparedStatement statement = connection.prepareStatement(GET_USER)) {
       statement.setString(1, name);
       statement.setString(2, password);
       try (ResultSet rs = statement.executeQuery()) {
@@ -105,7 +105,7 @@ public class UserRepositoryImpl implements UserRepository {
   @SneakyThrows
   public boolean checkRegistered(String name, String password) {
     log.info("user existence check started Username=[{}]" + name);
-    try (PreparedStatement statement = connection.prepareStatement(CHECK_REGISTERED)) {
+    try (PreparedStatement statement = connection.prepareStatement(GET_USER)) {
       statement.setString(1, name);
       statement.setString(2, password);
       try (ResultSet rs = statement.executeQuery()) {

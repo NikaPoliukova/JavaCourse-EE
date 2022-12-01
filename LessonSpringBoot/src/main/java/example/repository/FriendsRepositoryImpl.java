@@ -111,7 +111,6 @@ public class FriendsRepositoryImpl implements FriendsRepository {
     }
   }
 
-  // подтверждение дружбы(добавление в друзья)
   public boolean approveFriendship(long sourceUserId, long targetUserId) {
     try (PreparedStatement statement = connection.prepareStatement(APPROVE_FRIENDSHIP)) {
       statement.setLong(1, sourceUserId);
@@ -130,8 +129,7 @@ public class FriendsRepositoryImpl implements FriendsRepository {
       statement.setLong(2, targetUserId);
       statement.setLong(3, sourceUserId);
       statement.setLong(4, targetUserId);
-      int updates = statement.executeUpdate(); // метод возвращает количество измененных строк,
-      // если > 0 , значит были изменения
+      int updates = statement.executeUpdate();
       return updates > 0;
     } catch (SQLException e) {
       throw new RuntimeException(e);

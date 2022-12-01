@@ -38,7 +38,8 @@ public class UserServiceImpl implements UserService {
   }
 
   public User getUser(String name, String password) {
-    return userRepository.getUser(name, password);
+    User user = userRepository.getUser(name, password);
+    return user;
   }
 
   public String getUserPassword(String userName) {

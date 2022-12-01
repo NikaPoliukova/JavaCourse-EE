@@ -32,5 +32,4 @@ public class User {
   public User(String userName) {
     this.userName = userName;
   }
-
 }
