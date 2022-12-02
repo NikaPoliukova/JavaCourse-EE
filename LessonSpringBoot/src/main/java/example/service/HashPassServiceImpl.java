@@ -23,3 +23,4 @@ public class HashPassServiceImpl {
     return hasher.hashToString(12, password.toCharArray());
   }
 }
+

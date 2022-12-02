@@ -12,37 +12,33 @@ import java.util.List;
 @Log4j2
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl {
 
   private final UserRepository userRepository;
 
   public List<User> findUsers() {
-    return userRepository.findUsers();
+    return userRepository.findAll();
   }
 
   public void addUser(String userName, String password) {
-    if (!isExistsByName(userName)) {
-      userRepository.addUser(userName, password);
-    } else {
+    if (userRepository.findPasswordByUsername(userName) != null || !(userRepository.findPasswordByUsername(userName).isEmpty())) {
       log.info("Пользователь существует");
-      throw new RuntimeException("This login already exists");
+      throw new RuntimeException("This user already exists");
     }
+    final User user = new User(userName, password);
+    userRepository.save(user);
   }
-
-  public boolean isExistsByName(String name) {
-    return userRepository.isExistsByName(name);
-  }
-
   public List<User> findUserWithSearch(String name) {
     return userRepository.findUserWithSearch(name);
   }
 
-  public User getUser(String name, String password) {
-    User user = userRepository.getUser(name, password);
+  public User findUserByNameAndPassword(String name, String password) {
+    User user = userRepository.findUserByNameAndPassword(name, password);
     return user;
   }
 
-  public String getUserPassword(String userName) {
-    return userRepository.getUserPassword(userName);
+  public String findPasswordByUsername(String userName) {
+    return userRepository.findPasswordByUsername(userName);
   }
 }
+

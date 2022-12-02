@@ -5,7 +5,7 @@ import example.AuthContext;
 import example.dto.UserDto;
 import example.model.User;
 import example.service.HashPassServiceImpl;
-import example.service.UserService;
+import example.service.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +24,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class LoginController {
 
-  private final UserService userService;
+  private final UserServiceImpl userService;
   private final AuthContext authContext;
   private final HashPassServiceImpl hashPassService;
 
@@ -36,11 +36,11 @@ public class LoginController {
 
   @PostMapping
   protected RedirectView userAuthorization(Model model, @Valid @ModelAttribute("dto") UserDto dto) {
-    String hashPass = userService.getUserPassword(dto.getUserName());
+    String hashPass = userService.findPasswordByUsername(dto.getUserName());
     if (hashPassService.verify(dto.getPassword(), hashPass)) {
-      userService.getUser(dto.getUserName(), hashPass);
+      userService.findUserByNameAndPassword(dto.getUserName(), hashPass);//ищем только по имени
       model.addAttribute("userName", dto.getUserName());
-      User user= userService.getUser(dto.getUserName(), hashPass);
+      User user= userService.findUserByNameAndPassword(dto.getUserName(), hashPass);
       Long userId = user.getUserId();
       model.addAttribute("userId", userId);
       authContext.setUserId(user.getUserId());
@@ -51,4 +51,5 @@ public class LoginController {
       return new RedirectView("login?error=" + " enter incorrect password");
     }
   }
+
 }

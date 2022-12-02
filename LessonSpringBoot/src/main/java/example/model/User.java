@@ -1,23 +1,34 @@
 package example.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
-@AllArgsConstructor
-@Setter
-@Getter
-@ToString
+@Entity
+@Table(name = "users")
+@Data
 @NoArgsConstructor
 public class User {
-  Long userId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_id")
+   Long userId;
+
+  @Column(name = "username")
   String userName;
+
+  @Column(name = "password")
   String password;
+
+  @Column(name = "created_at", insertable = false)
   Date createdDate;
+
 
   public User(Long userId, String userName) {
     this.userId = userId;

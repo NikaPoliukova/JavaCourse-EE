@@ -2,13 +2,12 @@ package example.controller;
 
 import example.AuthContext;
 import example.model.User;
-import example.service.FriendsService;
+import example.service.FriendsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -19,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 
 public class FriendRequestsController {
-  private final FriendsService friendsService;
+  private final FriendsServiceImpl friendsService;
   private final AuthContext authContext;
 
   @GetMapping("/incoming_friend_requests")
@@ -28,6 +27,7 @@ public class FriendRequestsController {
     model.addAttribute("incomingFriendRequests", incomingFriendRequests);
     return "incoming_friend_requests";
   }
+
 
   @PostMapping("/incoming_and_cancel_friend_requests")
   protected RedirectView cancelIncomingFriendRequests( @Valid @RequestParam("cancelUserId") long cancelUserId) {

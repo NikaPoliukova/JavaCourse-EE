@@ -1,9 +1,8 @@
 package example.controller;
 
-import example.AuthContext;
 import example.dto.UserDto;
 import example.service.HashPassServiceImpl;
-import example.service.UserService;
+import example.service.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -23,7 +22,7 @@ import javax.validation.Valid;
 @RequestMapping("/registration")
 @AllArgsConstructor
 public class RegisterController {
-  private final UserService userService;
+  private final UserServiceImpl userService;
   private HashPassServiceImpl hashPassService;
 
 
@@ -38,4 +37,5 @@ public class RegisterController {
     userService.addUser(dto.getUserName(), hashPassService.hashPass(dto.getPassword()));
        return new RedirectView("/login");
   }
+
 }
