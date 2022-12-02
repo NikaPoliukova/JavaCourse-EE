@@ -30,5 +30,9 @@ public class MvcConfig implements WebMvcConfigurer {
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(new MappedInterceptor(new String[]{"/users"}, new AuthInterceptor(authContext)));
+    registry.addInterceptor(new MappedInterceptor(new String[]{"/friends"}, new AuthInterceptor(authContext)));
+    registry.addInterceptor(new MappedInterceptor(new String[]{"/incoming_friend_requests"}, new AuthInterceptor(authContext)));
+    registry.addInterceptor(new MappedInterceptor(new String[]{"/outgoing_friend_requests"}, new AuthInterceptor(authContext)));
+
   }
 }
