@@ -9,11 +9,11 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class FriendsServiceImpl implements FriendsService {
+public class FriendsServiceImpl  {
   private final FriendsRepository friendsRepository;
 
-  public List<User> findAllFriends(long userId) {
-    return friendsRepository.findAllFriends(userId);
+  public List<User> findAllById(long userId) {
+    return friendsRepository.findAllById(userId);
   }
 
   public List<User> findIncomingFriendRequests(long userId) {

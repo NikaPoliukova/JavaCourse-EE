@@ -2,22 +2,16 @@ package example.repository;
 
 
 import example.model.User;
-
+import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
-public interface UserRepository {
-
-  List<User> findUsers();
-
-  boolean isExistsByName(String name);
-
-  void addUser(String userName, String password);
+public interface UserRepository extends JpaRepository<User,Long> {
 
   List<User> findUserWithSearch(String name);
 
-  User getUser(String name, String password);
+  User findUserByNameAndPassword(String name, String password);
 
-  String getUserPassword(String userName);
+  String findUserByName(String userName);
 
-  boolean checkRegistered(String name, String password);
 }
+

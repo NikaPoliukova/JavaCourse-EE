@@ -1,11 +1,12 @@
 package example.repository;
 
 import example.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface FriendsRepository {
-  List<User> findAllFriends(long userId);
+public interface FriendsRepository extends JpaRepository<User,Long> {
+  List<User> findAllById(long userId);
 
   List<User> findIncomingFriendRequests(long userId);
 
