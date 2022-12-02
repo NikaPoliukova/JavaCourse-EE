@@ -44,4 +44,5 @@ public class FriendsServiceImpl  {
   public boolean restoreFriendship(long sourceUserId, long targetUserId) {
     return friendsRepository.restoreFriendship(sourceUserId, targetUserId);
   }
+
 }

@@ -7,7 +7,6 @@ import javax.validation.constraints.NotEmpty;
 
 
 @Data
-
 public class UserDto {
   @NotEmpty
   private String userName;
@@ -15,3 +14,4 @@ public class UserDto {
   private String password;
   private Long userId;
 }
+

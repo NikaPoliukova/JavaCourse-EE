@@ -20,3 +20,4 @@ public interface FriendsRepository extends JpaRepository<User,Long> {
 
   boolean cancelFriendship(long sourceUserId, long targetUserId);
 }
+

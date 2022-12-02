@@ -36,8 +36,7 @@ public class LoginController {
 
   @PostMapping
   protected RedirectView userAuthorization(Model model, @Valid @ModelAttribute("dto") UserDto dto) {
-    String hashPass = userService.findUserByName(dto.getUserName());//получить пароль,не совсем понимаю,
-    // как правильно именовать этот метод
+    String hashPass = userService.findPasswordByUsername(dto.getUserName());
     if (hashPassService.verify(dto.getPassword(), hashPass)) {
       userService.findUserByNameAndPassword(dto.getUserName(), hashPass);//ищем только по имени
       model.addAttribute("userName", dto.getUserName());
@@ -52,4 +51,5 @@ public class LoginController {
       return new RedirectView("login?error=" + " enter incorrect password");
     }
   }
+
 }

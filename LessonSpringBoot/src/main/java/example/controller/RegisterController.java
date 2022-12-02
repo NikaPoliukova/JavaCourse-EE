@@ -37,4 +37,5 @@ public class RegisterController {
     userService.addUser(dto.getUserName(), hashPassService.hashPass(dto.getPassword()));
        return new RedirectView("/login");
   }
+
 }

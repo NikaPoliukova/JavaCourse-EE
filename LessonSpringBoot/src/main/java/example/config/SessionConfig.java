@@ -16,5 +16,6 @@ public class SessionConfig {
   @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
   public AuthContext authContext() {
     return new AuthContext();
+
   }
 }

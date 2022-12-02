@@ -21,7 +21,7 @@ public class UserServiceImpl {
   }
 
   public void addUser(String userName, String password) {
-    if (userRepository.findUserByName(userName) != null || !(userRepository.findUserByName(userName).isEmpty())) {
+    if (userRepository.findPasswordByUsername(userName) != null || !(userRepository.findPasswordByUsername(userName).isEmpty())) {
       log.info("Пользователь существует");
       throw new RuntimeException("This user already exists");
     }
@@ -37,7 +37,8 @@ public class UserServiceImpl {
     return user;
   }
 
-  public String findUserByName(String userName) {
-    return userRepository.findUserByName(userName);
+  public String findPasswordByUsername(String userName) {
+    return userRepository.findPasswordByUsername(userName);
   }
 }
+

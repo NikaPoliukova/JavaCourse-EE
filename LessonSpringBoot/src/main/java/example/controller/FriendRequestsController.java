@@ -28,6 +28,7 @@ public class FriendRequestsController {
     return "incoming_friend_requests";
   }
 
+
   @PostMapping("/incoming_and_cancel_friend_requests")
   protected RedirectView cancelIncomingFriendRequests( @Valid @RequestParam("cancelUserId") long cancelUserId) {
     friendsService.cancelFriendship(cancelUserId, authContext.getUserId());
