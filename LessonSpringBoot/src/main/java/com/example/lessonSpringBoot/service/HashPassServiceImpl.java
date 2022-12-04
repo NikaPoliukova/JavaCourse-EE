@@ -1,4 +1,4 @@
-package example.service;
+package com.example.lessonSpringBoot.service;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;

@@ -16,6 +16,7 @@
             width: 100%;
             border: 1px solid #ddd;
         }
+
         .button {
             background-color: red;
             border: none;
@@ -64,13 +65,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="friend: ${friends}">
+                        <tr th:each="friend: ${friends}" th:if="${friend.getUserId() != myUserId}">
                             <td th:text="${friend.getUserId()}"/>
                             <td th:text="${friend.getUserName()}"/>
                             <td>
                                 <form action="#" th:action="@{/friends}" method="post">
                                     <input type="hidden" th:value="${friend.getUserId()}" name="targetUserId"/>
-                                    <button type='submit' class="button" >Delete</button>
+                                    <button type='submit' class="button">Delete</button>
                                 </form>
                             </td>
                         </tr>

@@ -1,4 +1,4 @@
-package example.model;
+package com.example.lessonSpringBoot.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,23 +11,24 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
+
 @Entity
 @Table(name = "users")
 @Data
 @NoArgsConstructor
 public class User {
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_id")
-   Long userId;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "user_id")
+  private Long userId;
 
   @Column(name = "username")
-  String userName;
+  private String userName;
 
-  @Column(name = "password")
-  String password;
+  private String password;
 
   @Column(name = "created_at", insertable = false)
-  Date createdDate;
+  private Date createdDate;
 
 
   public User(Long userId, String userName) {

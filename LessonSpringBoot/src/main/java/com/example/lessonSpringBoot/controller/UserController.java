@@ -1,10 +1,10 @@
-package example.controller;
+package com.example.lessonSpringBoot.controller;
 
 
-import example.AuthContext;
-import example.model.User;
-import example.service.FriendsServiceImpl;
-import example.service.UserServiceImpl;
+import com.example.lessonSpringBoot.AuthContext;
+import com.example.lessonSpringBoot.model.User;
+import com.example.lessonSpringBoot.service.FriendsServiceImpl;
+import com.example.lessonSpringBoot.service.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.http.MediaType;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Validated
@@ -34,14 +35,21 @@ public class UserController {
   @GetMapping
   public String getUsers(final ModelMap model/*,@RequestParam("search") String searchValue*/) {
     final List<User> users;
+    List<Long> friendIds = new ArrayList<>();
+    List<User> friends = friendsService.getFriendsByUserIdAndStatus(authContext.getUserId());
+    for (User friend : friends) {
+      friendIds.add(friend.getUserId());
+    }
    /* if (searchValue == null) {
       users = userService.findUsers();
     } else {
-      users = userService.findUserWithSearch(searchValue);
+      users = userService.findUsersBySearch(searchValue);
     }*/
-    users = userService.findUsers();
+    users = userService.findAllUsers();
+    model.addAttribute("friendIds", friendIds);
     model.addAttribute("users", users);
     model.addAttribute("myUserId", authContext.getUserId());
+
     return "users";
   }
 
@@ -49,6 +57,7 @@ public class UserController {
   @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public RedirectView createFriendRequest(@Valid @RequestParam("friendUserId") long friendUserId) {
     friendsService.createFriendRequest(authContext.getUserId(), friendUserId);
+
     return new RedirectView("/users");
   }
 }

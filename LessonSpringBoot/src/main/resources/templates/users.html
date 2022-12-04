@@ -71,7 +71,7 @@
                             <td th:text="${user.getUserId()}"/>
                             <td th:text="${user.getUserName()}"/>
                             <td th:text="${user.getCreatedDate()}"/>
-                            <td th:if="${user.getUserId() != myUserId}">
+                            <td th:if="${user.getUserId() != myUserId and !(#lists.contains(friendIds, user.getUserId()))}">
                                 <div style="width: 70px">
                                     <form action="#" th:action="@{/users}" method="post">
                                         <input type="hidden" th:value="${user.getUserId()}" name="friendUserId"/>
