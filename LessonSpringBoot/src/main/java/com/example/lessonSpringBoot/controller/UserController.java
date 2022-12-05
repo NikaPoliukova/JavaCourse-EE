@@ -31,33 +31,47 @@ public class UserController {
   private final AuthContext authContext;
   private final FriendsServiceImpl friendsService;
 
-  @SneakyThrows
+ /* @SneakyThrows
   @GetMapping
-  public String getUsers(final ModelMap model/*,@RequestParam("search") String searchValue*/) {
-    final List<User> users;
+  public String getUsers(final ModelMap model) {
     List<Long> friendIds = new ArrayList<>();
     List<User> friends = friendsService.getFriendsByUserIdAndStatus(authContext.getUserId());
     for (User friend : friends) {
       friendIds.add(friend.getUserId());
     }
-   /* if (searchValue == null) {
-      users = userService.findUsers();
-    } else {
-      users = userService.findUsersBySearch(searchValue);
-    }*/
-    users = userService.findAllUsers();
+    final List<User> users = userService.findAllUsers();
     model.addAttribute("friendIds", friendIds);
     model.addAttribute("users", users);
     model.addAttribute("myUserId", authContext.getUserId());
+    return "users";
+  }*/
 
+  @SneakyThrows
+  @GetMapping
+  public String getUsers(final ModelMap model,
+                         @RequestParam(value = "searchValue", required = false) String searchValue) {
+    List<User> users;
+    List<Long> friendIds = new ArrayList<>();
+    List<User> friends = friendsService.getFriendsByUserIdAndStatus(authContext.getUserId());
+    for (User friend : friends) {
+      friendIds.add(friend.getUserId());
+    }
+    if (searchValue == null) {
+      users = userService.findAllUsers();
+    } else {
+      users = userService.findByUserNameStartingWith(searchValue);
+    }
+    model.addAttribute("friendIds", friendIds);
+    model.addAttribute("users", users);
+    model.addAttribute("myUserId", authContext.getUserId());
     return "users";
   }
+
 
   @SneakyThrows
   @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public RedirectView createFriendRequest(@Valid @RequestParam("friendUserId") long friendUserId) {
     friendsService.createFriendRequest(authContext.getUserId(), friendUserId);
-
     return new RedirectView("/users");
   }
 }

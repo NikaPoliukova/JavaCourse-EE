@@ -5,7 +5,6 @@ import com.example.lessonSpringBoot.model.User;
 import com.example.lessonSpringBoot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,19 +32,18 @@ public class UserServiceImpl {
     userRepository.save(user);
   }
 
-  /* public List<User> findUsersBySearch(String name) {
-     return userRepository.findUsersBySearch(name);
+  public List<User> findByUserNameStartingWith(String name) {
+     return userRepository.findByUserNameStartingWith(name);
    }
-  */
+
   public User findUserByUserNameAndPassword(String name, String password) {
     User user = userRepository.findUserByUserName(name);
       if (hashPassService.verify(password, user.getPassword())) {
       return user;
     }return null;
   }
-
-  public String findPasswordByUserName(String userName) {
+  /*public String findPasswordByUserName(String userName) {
     return userRepository.findPasswordByUserName(userName);
-  }
+  }*/
 }
 

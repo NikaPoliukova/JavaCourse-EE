@@ -1,8 +1,8 @@
-package example.controller;
+package com.example.lessonSpringBoot.controller;
 
-import example.AuthContext;
-import example.model.User;
-import example.service.FriendsServiceImpl;
+import com.example.lessonSpringBoot.AuthContext;
+import com.example.lessonSpringBoot.model.User;
+import com.example.lessonSpringBoot.service.FriendsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.http.MediaType;
@@ -30,8 +30,9 @@ public class FriendsController {
   @SneakyThrows
   @GetMapping
   public String getAllFriends(final ModelMap model) {
-    List<User> friends = friendsService.findAllById(authContext.getUserId());
+    List<User> friends = friendsService.getFriendsByUserIdAndStatus(authContext.getUserId());
     model.addAttribute("friends", friends);
+    model.addAttribute("myUserId", authContext.getUserId());
     return "friends";
   }
 
@@ -42,5 +43,6 @@ public class FriendsController {
     friendsService.cancelFriendship(authContext.getUserId(), targetUserId);
     return new RedirectView("/friends");
   }
+
 }
 
