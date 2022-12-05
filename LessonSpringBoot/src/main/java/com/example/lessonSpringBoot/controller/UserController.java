@@ -31,21 +31,6 @@ public class UserController {
   private final AuthContext authContext;
   private final FriendsServiceImpl friendsService;
 
- /* @SneakyThrows
-  @GetMapping
-  public String getUsers(final ModelMap model) {
-    List<Long> friendIds = new ArrayList<>();
-    List<User> friends = friendsService.getFriendsByUserIdAndStatus(authContext.getUserId());
-    for (User friend : friends) {
-      friendIds.add(friend.getUserId());
-    }
-    final List<User> users = userService.findAllUsers();
-    model.addAttribute("friendIds", friendIds);
-    model.addAttribute("users", users);
-    model.addAttribute("myUserId", authContext.getUserId());
-    return "users";
-  }*/
-
   @SneakyThrows
   @GetMapping
   public String getUsers(final ModelMap model,
@@ -66,7 +51,6 @@ public class UserController {
     model.addAttribute("myUserId", authContext.getUserId());
     return "users";
   }
-
 
   @SneakyThrows
   @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)

@@ -19,7 +19,7 @@ public class UserServiceImpl {
   private final HashPassServiceImpl hashPassService;
 
   public List<User> findAllUsers() {
-    return userRepository.findAll();
+    return userRepository.findAllUsers();
   }
 
   @Transactional
@@ -28,22 +28,19 @@ public class UserServiceImpl {
       throw new RuntimeException("This user already exists");
     }
     String hashPass = hashPassService.hashPass(password);
-    User user = new User(userName, hashPass);
-    userRepository.save(user);
+    userRepository.addUser(userName, hashPass);
   }
 
   public List<User> findByUserNameStartingWith(String name) {
-     return userRepository.findByUserNameStartingWith(name);
-   }
+    return userRepository.findByUserNameStartingWith(name);
+  }
 
   public User findUserByUserNameAndPassword(String name, String password) {
     User user = userRepository.findUserByUserName(name);
-      if (hashPassService.verify(password, user.getPassword())) {
+    if (hashPassService.verify(password, user.getPassword())) {
       return user;
-    }return null;
+    }
+    return null;
   }
-  /*public String findPasswordByUserName(String userName) {
-    return userRepository.findPasswordByUserName(userName);
-  }*/
 }
 
