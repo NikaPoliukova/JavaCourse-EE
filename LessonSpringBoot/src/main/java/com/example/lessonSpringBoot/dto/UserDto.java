@@ -1,4 +1,4 @@
-package example.dto;
+package com.example.lessonSpringBoot.dto;
 
 
 import lombok.Data;

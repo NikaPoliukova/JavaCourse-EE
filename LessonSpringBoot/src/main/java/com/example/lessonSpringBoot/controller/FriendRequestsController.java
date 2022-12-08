@@ -1,8 +1,8 @@
-package example.controller;
+package com.example.lessonSpringBoot.controller;
 
-import example.AuthContext;
-import example.model.User;
-import example.service.FriendsServiceImpl;
+import com.example.lessonSpringBoot.AuthContext;
+import com.example.lessonSpringBoot.model.User;
+import com.example.lessonSpringBoot.service.FriendsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +27,6 @@ public class FriendRequestsController {
     model.addAttribute("incomingFriendRequests", incomingFriendRequests);
     return "incoming_friend_requests";
   }
-
 
   @PostMapping("/incoming_and_cancel_friend_requests")
   protected RedirectView cancelIncomingFriendRequests( @Valid @RequestParam("cancelUserId") long cancelUserId) {

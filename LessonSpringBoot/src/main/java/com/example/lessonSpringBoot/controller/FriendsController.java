@@ -1,10 +1,8 @@
-package example.controller;
+package com.example.lessonSpringBoot.controller;
 
-
-import example.AuthContext;
-import example.model.User;
-import example.service.FriendsServiceImpl;
-import example.service.UserServiceImpl;
+import com.example.lessonSpringBoot.AuthContext;
+import com.example.lessonSpringBoot.model.User;
+import com.example.lessonSpringBoot.service.FriendsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.http.MediaType;
@@ -22,34 +20,29 @@ import java.util.List;
 
 @Validated
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/friends")
 @RequiredArgsConstructor
-public class UserController {
 
-  private final UserServiceImpl userService;
+public class FriendsController {
   private final AuthContext authContext;
   private final FriendsServiceImpl friendsService;
 
   @SneakyThrows
   @GetMapping
-  public String getUsers(final ModelMap model/*,@RequestParam("search") String searchValue*/) {
-    final List<User> users;
-   /* if (searchValue == null) {
-      users = userService.findUsers();
-    } else {
-      users = userService.findUserWithSearch(searchValue);
-    }*/
-    users = userService.findUsers();
-    model.addAttribute("users", users);
+  public String getAllFriends(final ModelMap model) {
+    List<User> friends = friendsService.getFriendsByUserIdAndStatus(authContext.getUserId());
+    model.addAttribute("friends", friends);
     model.addAttribute("myUserId", authContext.getUserId());
-    return "users";
+    return "friends";
   }
+
 
   @SneakyThrows
   @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-  public RedirectView createFriendRequest(@Valid @RequestParam("friendUserId") long friendUserId) {
-    friendsService.createFriendRequest(authContext.getUserId(), friendUserId);
-    return new RedirectView("/users");
+  public RedirectView createFriendRequest(@Valid @RequestParam("targetUserId") long targetUserId) {
+    friendsService.cancelFriendship(authContext.getUserId(), targetUserId);
+    return new RedirectView("/friends");
   }
+
 }
 

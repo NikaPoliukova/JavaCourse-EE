@@ -38,6 +38,41 @@
         tr:nth-child(even) {
             background-color: #f2f2f2
         }
+        body {
+            background-color: #F0F8FF;
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: #555;
+            overflow: auto;
+        }
+
+        .navbar a {
+            float: left;
+            padding: 12px;
+            color: white;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        header{
+            border-width: 2px;
+        }
+
+        .navbar a:hover {
+            background-color: #000;
+        }
+
+        .active {
+            background-color: #04AA6D;
+        }
+
+        @media screen and (max-width: 500px) {
+            .navbar a {
+                float: none;
+                display: block;
+            }
+        }
     </style>
 </head>
 <body onload="active()">
@@ -47,6 +82,10 @@
     <br class="row content">
     <div class="col-sm-8 text-left mainContent">
         <h1>Users</h1>
+        <form action="#" th:action="@{/users}" method="get">
+            <input  type="text" name="searchValue" placeholder="Поиск пользователя..."/>
+            <button type="submit">Поиск</button>
+        </form>
     </div>
     <div class="container p-30">
         <div class="row">
@@ -71,7 +110,7 @@
                             <td th:text="${user.getUserId()}"/>
                             <td th:text="${user.getUserName()}"/>
                             <td th:text="${user.getCreatedDate()}"/>
-                            <td th:if="${user.getUserId() != myUserId}">
+                            <td th:if="${user.getUserId() != myUserId and !(#lists.contains(friendIds, user.getUserId()))}">
                                 <div style="width: 70px">
                                     <form action="#" th:action="@{/users}" method="post">
                                         <input type="hidden" th:value="${user.getUserId()}" name="friendUserId"/>

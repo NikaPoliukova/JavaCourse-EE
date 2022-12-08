@@ -1,7 +1,7 @@
-package example.config;
+package com.example.lessonSpringBoot.config;
 
 
-import example.AuthContext;
+import com.example.lessonSpringBoot.AuthContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;

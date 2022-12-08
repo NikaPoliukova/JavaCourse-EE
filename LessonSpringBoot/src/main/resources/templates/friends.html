@@ -16,6 +16,10 @@
             width: 100%;
             border: 1px solid #ddd;
         }
+        body {
+            background-color: #FFEBCD;
+        }
+
         .button {
             background-color: red;
             border: none;
@@ -36,6 +40,41 @@
 
         tr:nth-child(even) {
             background-color: #f2f2f2
+        }
+        body {
+            background-color: #F0F8FF;
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: #555;
+            overflow: auto;
+        }
+
+        .navbar a {
+            float: left;
+            padding: 12px;
+            color: white;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        header{
+            border-width: 2px;
+        }
+
+        .navbar a:hover {
+            background-color: #000;
+        }
+
+        .active {
+            background-color: #04AA6D;
+        }
+
+        @media screen and (max-width: 500px) {
+            .navbar a {
+                float: none;
+                display: block;
+            }
         }
     </style>
 </head>
@@ -64,13 +103,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="friend: ${friends}">
+                        <tr th:each="friend: ${friends}" th:if="${friend.getUserId() != myUserId}">
                             <td th:text="${friend.getUserId()}"/>
                             <td th:text="${friend.getUserName()}"/>
                             <td>
                                 <form action="#" th:action="@{/friends}" method="post">
                                     <input type="hidden" th:value="${friend.getUserId()}" name="targetUserId"/>
-                                    <button type='submit' class="button" >Delete</button>
+                                    <button type='submit' class="button">Delete</button>
                                 </form>
                             </td>
                         </tr>

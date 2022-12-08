@@ -1,4 +1,4 @@
-package example;
+package com.example.lessonSpringBoot;
 
 import lombok.Data;
 

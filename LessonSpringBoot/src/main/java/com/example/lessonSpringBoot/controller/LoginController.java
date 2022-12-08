@@ -1,11 +1,11 @@
-package example.controller;
+package com.example.lessonSpringBoot.controller;
 
 
-import example.AuthContext;
-import example.dto.UserDto;
-import example.model.User;
-import example.service.HashPassServiceImpl;
-import example.service.UserServiceImpl;
+import com.example.lessonSpringBoot.AuthContext;
+import com.example.lessonSpringBoot.dto.UserDto;
+import com.example.lessonSpringBoot.model.User;
+import com.example.lessonSpringBoot.service.HashPassServiceImpl;
+import com.example.lessonSpringBoot.service.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,18 +31,16 @@ public class LoginController {
   @GetMapping
   protected String userLogin(Model model) {
     model.addAttribute("dto", new UserDto());
-     return "login";
+    return "login";
   }
 
   @PostMapping
   protected RedirectView userAuthorization(Model model, @Valid @ModelAttribute("dto") UserDto dto) {
-    String hashPass = userService.findPasswordByUsername(dto.getUserName());
-    if (hashPassService.verify(dto.getPassword(), hashPass)) {
-      userService.findUserByNameAndPassword(dto.getUserName(), hashPass);//ищем только по имени
-      model.addAttribute("userName", dto.getUserName());
-      User user= userService.findUserByNameAndPassword(dto.getUserName(), hashPass);
+    User user = userService.findUserByUserNameAndPassword(dto.getUserName(), dto.getPassword());
+    if (user != null) {
       Long userId = user.getUserId();
       model.addAttribute("userId", userId);
+      model.addAttribute("userName", dto.getUserName());
       authContext.setUserId(user.getUserId());
       authContext.setUserName(user.getUserName());
       authContext.setAuthorized(true);

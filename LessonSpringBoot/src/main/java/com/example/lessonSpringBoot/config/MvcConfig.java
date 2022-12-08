@@ -1,9 +1,9 @@
-package example.config;
+package com.example.lessonSpringBoot.config;
 
 
-import example.interceptor.AuthInterceptor;
+import com.example.lessonSpringBoot.AuthContext;
+import com.example.lessonSpringBoot.interceptor.AuthInterceptor;
 
-import example.AuthContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

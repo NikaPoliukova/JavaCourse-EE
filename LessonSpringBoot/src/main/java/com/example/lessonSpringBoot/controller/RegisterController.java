@@ -1,8 +1,8 @@
-package example.controller;
+package com.example.lessonSpringBoot.controller;
 
-import example.dto.UserDto;
-import example.service.HashPassServiceImpl;
-import example.service.UserServiceImpl;
+import com.example.lessonSpringBoot.dto.UserDto;
+import com.example.lessonSpringBoot.service.HashPassServiceImpl;
+import com.example.lessonSpringBoot.service.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -22,8 +22,9 @@ import javax.validation.Valid;
 @RequestMapping("/registration")
 @AllArgsConstructor
 public class RegisterController {
+
   private final UserServiceImpl userService;
-  private HashPassServiceImpl hashPassService;
+
 
 
   @GetMapping
@@ -34,7 +35,7 @@ public class RegisterController {
 
   @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   protected RedirectView userRegistration(@Valid @ModelAttribute("dto") UserDto dto) {
-    userService.addUser(dto.getUserName(), hashPassService.hashPass(dto.getPassword()));
+    userService.addUser(dto.getUserName(), dto.getPassword());
        return new RedirectView("/login");
   }
 
