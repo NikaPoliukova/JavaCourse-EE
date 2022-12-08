@@ -26,7 +26,6 @@ public class LoginController {
 
   private final UserServiceImpl userService;
   private final AuthContext authContext;
-  private final HashPassServiceImpl hashPassService;
 
   @GetMapping
   protected String userLogin(Model model) {
@@ -37,17 +36,12 @@ public class LoginController {
   @PostMapping
   protected RedirectView userAuthorization(Model model, @Valid @ModelAttribute("dto") UserDto dto) {
     User user = userService.findUserByUserNameAndPassword(dto.getUserName(), dto.getPassword());
-    if (user != null) {
-      Long userId = user.getUserId();
-      model.addAttribute("userId", userId);
-      model.addAttribute("userName", dto.getUserName());
-      authContext.setUserId(user.getUserId());
-      authContext.setUserName(user.getUserName());
-      authContext.setAuthorized(true);
-      return new RedirectView("/users");
-    } else {
-      return new RedirectView("login?error=" + " enter incorrect password");
-    }
+    Long userId = user.getUserId();
+    model.addAttribute("userId", userId);
+    model.addAttribute("userName", dto.getUserName());
+    authContext.setUserId(user.getUserId());
+    authContext.setUserName(user.getUserName());
+    authContext.setAuthorized(true);
+    return new RedirectView("/users/page/1");
   }
-
 }
