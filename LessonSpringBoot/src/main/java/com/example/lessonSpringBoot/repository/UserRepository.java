@@ -1,20 +1,30 @@
 package com.example.lessonSpringBoot.repository;
 
-
 import com.example.lessonSpringBoot.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jdbc.repository.query.Modifying;
+import org.springframework.data.jdbc.repository.query.Query;
+import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends Repository<User, Long> {
 
-  List<User> findByUserNameStartingWith(String name);
+  /*@Query(value = "select * from users", nativeQuery = true)
+  List<User> findAllUsers();*/
 
+  @Query("select * from users")
+  List<User> findAllUsers();
 
-  @Query(value = "select password from users where username = ?1", nativeQuery = true)
-  String findPasswordByUserName(String userName);
+  @Modifying
+  @Query(value = "insert into users (username, password) VALUES (:userName, :password)")
+  void addUser(@Param("userName") String userName, @Param("password") String password);
 
-  User findUserByUserName(String name);
+  @Query(value = "select * from users where username like :name")
+  List<User> findByUserNameStartingWith(@Param("name") String name);
+
+  @Query(value = "select * from users where username= :name")
+  User findUserByUserName(@Param("name") String name);
+
 
 }
