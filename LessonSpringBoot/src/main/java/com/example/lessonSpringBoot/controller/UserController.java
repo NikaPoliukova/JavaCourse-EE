@@ -59,7 +59,7 @@ public class UserController {
   @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public RedirectView createFriendRequest(@Valid @RequestParam("friendUserId") long friendUserId) {
     friendsService.createFriendRequest(authContext.getUserId(), friendUserId);
-    return new RedirectView("/users/page");
+    return new RedirectView("/users/page/1");
   }
 }
 

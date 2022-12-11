@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl {
-
+ 
   private final UserRepository userRepository;
   private final HashPassServiceImpl hashPassService;
 
@@ -44,6 +44,10 @@ public class UserServiceImpl {
     } else {
       throw new RuntimeException("enter incorrect password");
     }
+  }
+
+  public User findUserByUserName(String userName) {
+    return userRepository.findUserByUserName(userName);
   }
 }
 

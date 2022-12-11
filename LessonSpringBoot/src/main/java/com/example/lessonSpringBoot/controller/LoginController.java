@@ -4,7 +4,6 @@ package com.example.lessonSpringBoot.controller;
 import com.example.lessonSpringBoot.AuthContext;
 import com.example.lessonSpringBoot.dto.UserDto;
 import com.example.lessonSpringBoot.model.User;
-import com.example.lessonSpringBoot.service.HashPassServiceImpl;
 import com.example.lessonSpringBoot.service.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
