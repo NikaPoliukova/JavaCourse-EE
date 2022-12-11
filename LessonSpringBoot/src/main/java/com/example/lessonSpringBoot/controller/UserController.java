@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
@@ -31,11 +30,10 @@ public class UserController {
   private final AuthContext authContext;
   private final FriendsServiceImpl friendsService;
 
-  @GetMapping("/users/page/{pageNumber}")
-  public String findAllUsersByPageAndSearch(final ModelMap model,
-                                            @RequestParam(name = "searchValue", required = false) String searchValue,
-                                            @PathVariable(value = "pageNumber") Integer pageNumber) {
-    int pageSize = 5;
+  @GetMapping("/users")
+  public String findAllUsersByPageAndSearch(final ModelMap model, @RequestParam(name = "searchValue", required = false) String searchValue,
+                                            @RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
+                                            @RequestParam(value = "pageSize", required = false, defaultValue = "2") Integer pageSize) {
     Page<User> page = userService.getFilteredUsers(searchValue, pageNumber - 1, pageSize);
     List<User> users = page.getContent();
     model.addAttribute("currentPage", pageNumber);
@@ -44,7 +42,8 @@ public class UserController {
     model.addAttribute("users", users);
     model.addAttribute("myUserId", authContext.getUserId());
     model.addAttribute("pageSize", pageSize);
-    model.addAttribute("searchValue", searchValue);
+    String searchValueAttribute = searchValue != null ? searchValue : "";
+    model.addAttribute("searchValue", searchValueAttribute);
 
     List<Long> friendIds = new ArrayList<>();
     List<User> friends = friendsService.getFriendsByUserIdAndStatus(authContext.getUserId());

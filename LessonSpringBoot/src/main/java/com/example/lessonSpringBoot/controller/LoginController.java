@@ -41,6 +41,6 @@ public class LoginController {
     authContext.setUserId(user.getUserId());
     authContext.setUserName(user.getUserName());
     authContext.setAuthorized(true);
-    return new RedirectView("/users/page/1");
+    return new RedirectView("/users");
   }
 }
