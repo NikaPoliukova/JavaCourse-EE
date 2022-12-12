@@ -27,8 +27,8 @@ public interface FriendsRepository extends Repository<User, Long> {
   void createFriendRequest(@Param("sourceUserId") long sourceUserId, @Param("targetUserId") long targetUserId);
 
   @Modifying
-  @Query(value = "update friends set status = 'NEW', update_at = NOW(), source_user_id = ?1, target_user_id = ?2 " +
-      "where ((source_user_id = :sourceUserId or source_user_id = :targetUserId)" +
+  @Query(value = "update friends set status = 'NEW', update_at = NOW(), source_user_id =:sourceUserId, " +
+      "target_user_id =:targetUserId where ((source_user_id = :sourceUserId or source_user_id = :targetUserId)" +
       " and (target_user_id = :sourceUserId or target_user_id = :targetUserId))")
   Integer restoreFriendship(@Param("sourceUserId") long sourceUserId, @Param("targetUserId") long targetUserId);
 

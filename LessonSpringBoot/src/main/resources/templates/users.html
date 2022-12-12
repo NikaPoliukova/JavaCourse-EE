@@ -17,6 +17,7 @@
             width: 100%;
             border: 1px solid #ddd;
         }
+
         .button {
             background-color: #4CAF50;
             border: none;
@@ -38,6 +39,7 @@
         tr:nth-child(even) {
             background-color: #f2f2f2
         }
+
         body {
             background-color: #F0F8FF;
         }
@@ -55,7 +57,8 @@
             text-decoration: none;
             font-size: 17px;
         }
-        header{
+
+        header {
             border-width: 2px;
         }
 
@@ -73,6 +76,28 @@
                 display: block;
             }
         }
+
+        .pagination {
+            display: inline-block;
+        }
+
+        .pagination a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body onload="active()">
@@ -83,7 +108,7 @@
     <div class="col-sm-8 text-left mainContent">
         <h1>Users</h1>
         <form action="#" th:action="@{/users}" method="get">
-            <input  type="text" name="searchValue" placeholder="Поиск пользователя..."/>
+            <input type="text" name="searchValue" placeholder="Поиск пользователя..."/>
             <button type="submit">Поиск</button>
         </form>
     </div>
@@ -112,15 +137,33 @@
                             <td th:text="${user.getCreatedDate()}"/>
                             <td th:if="${user.getUserId() != myUserId and !(#lists.contains(friendIds, user.getUserId()))}">
                                 <div style="width: 70px">
-                                    <form action="#" th:action="@{/users}" method="post">
+                                    <form action="#" th:action="@{/users/page/1}" method="post">
                                         <input type="hidden" th:value="${user.getUserId()}" name="friendUserId"/>
-                                        <input type="submit" class= "button" value="Add to friends">
+                                        <input type="submit" class="button" value="Add to friends">
                                     </form>
                                 </div>
                             </td>
                         </tr>
                         </tbody>
                     </table>
+                    <nav aria-label="Page navigation example">
+                        Total Items [[${totalItems}]]
+                        <ul class="pagination">
+                                <a class="page-link" th:if="${currentPage > 1}" th:href="@{'/users?pageNumber='+ ${currentPage - 1} + '&searchValue='+ ${searchValue}}">Previous</a>
+                                <span th:unless="${currentPage > 1}"></span>
+
+                                <a class="page-link" th:if="${currentPage ==1}" th:href="@{/users}">1</a>
+                                <span th:unless="${currentPage > 1}"></span>
+
+                                <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                                    <a class="page-link" th:if="${i != currentPage}" th:href="@{'/users?pageNumber='+ ${i} + '&searchValue=' + ${searchValue}}">[[${i}]]</a>
+                               <span th:unless="${i != currentPage}"></span>
+                                </span>
+
+                                <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/users?pageNumber=' + ${totalPages}}">Last</a>
+                                <span th:unless="${currentPage < totalPages}"></span>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>

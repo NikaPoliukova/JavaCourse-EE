@@ -26,7 +26,6 @@ public class RegisterController {
   private final UserServiceImpl userService;
 
 
-
   @GetMapping
   protected String userRegistration(Model model) {
     model.addAttribute("dto", new UserDto());
@@ -36,7 +35,6 @@ public class RegisterController {
   @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   protected RedirectView userRegistration(@Valid @ModelAttribute("dto") UserDto dto) {
     userService.addUser(dto.getUserName(), dto.getPassword());
-       return new RedirectView("/login");
+    return new RedirectView("/login");
   }
-
 }

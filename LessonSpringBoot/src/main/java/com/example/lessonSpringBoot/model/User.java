@@ -1,33 +1,28 @@
 package com.example.lessonSpringBoot.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.util.Date;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
-@Entity
-@Table(name = "users")
+
 @Data
 @NoArgsConstructor
+@Table(name = "users")
 public class User {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "user_id")
+  @Column("user_id")
   private Long userId;
 
-  @Column(name = "username")
+  @Column("username")
   private String userName;
 
   private String password;
 
-  @Column(name = "created_at", insertable = false)
+  @Column("created_at")
   private Date createdDate;
 
 

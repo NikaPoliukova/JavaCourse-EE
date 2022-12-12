@@ -19,7 +19,7 @@ public class MvcConfig implements WebMvcConfigurer {
 
   @Override
   public void addViewControllers(ViewControllerRegistry registry) {
-    registry.addViewController("/users").setViewName("users");
+    registry.addViewController("/users/page").setViewName("users/page");
     registry.addViewController("/friends").setViewName("friends");
     registry.addViewController("/incoming_friend_requests").setViewName("incoming_friend_requests");
     registry.addViewController("/login").setViewName("login");
@@ -31,5 +31,4 @@ public class MvcConfig implements WebMvcConfigurer {
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(new MappedInterceptor(new String[]{"/users", "/friends", "/incoming_friend_requests", "/outgoing_friend_requests"}, new AuthInterceptor(authContext)));
   }
-
 }
