@@ -48,7 +48,7 @@ public class UserController {
     model.addAttribute("searchValue", searchValueAttribute);
 
     List<Long> friendIds = new ArrayList<>();
-    friendsService.getFriendsByUserIdAndStatus(authContext.getUserId()).forEach(f -> friendIds.add(f.getUserId()));
+    friendsService.getFriendsAndFriendRequests(authContext.getUserId()).forEach(f -> friendIds.add(f.getUserId()));
     model.addAttribute("friendIds", friendIds);
     return "users";
   }
