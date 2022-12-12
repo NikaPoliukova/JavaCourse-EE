@@ -1,4 +1,4 @@
-package com.example.lessonSpringBoot.model;
+package com.example.lessonSpringBoot.dto;
 
 import lombok.Value;
 
@@ -11,4 +11,3 @@ public class UserDtoRest {
   String userName;
   Date createdDate;
 }
-

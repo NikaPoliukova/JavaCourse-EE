@@ -108,7 +108,7 @@
                             <td th:text="${friend.getUserId()}"/>
                             <td th:text="${friend.getUserName()}"/>
                             <td>
-                                <form action="#" th:action="@{/outgoing_friend_requests(cancelUserId=${friend.getUserId()})}"
+                                <form action="#" th:action="@{/outgoing-friend-requests(cancelUserId=${friend.getUserId()})}"
                                       method="post">
                                     <button type="submit" class="button">Отменить</button>
                                 </form>

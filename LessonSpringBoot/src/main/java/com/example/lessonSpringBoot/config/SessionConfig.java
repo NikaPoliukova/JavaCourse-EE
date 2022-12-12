@@ -4,8 +4,6 @@ package com.example.lessonSpringBoot.config;
 import com.example.lessonSpringBoot.AuthContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.web.context.annotation.SessionScope;
 
 

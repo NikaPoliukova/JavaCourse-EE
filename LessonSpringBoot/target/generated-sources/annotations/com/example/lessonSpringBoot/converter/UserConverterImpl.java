@@ -1,7 +1,7 @@
 package com.example.lessonSpringBoot.converter;
 
+import com.example.lessonSpringBoot.dto.UserDtoRest;
 import com.example.lessonSpringBoot.model.User;
-import com.example.lessonSpringBoot.model.UserDtoRest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
