@@ -40,7 +40,6 @@ public class LoginController {
     model.addAttribute("userName", dto.getUserName());
     authContext.setUserId(user.getUserId());
     authContext.setUserName(user.getUserName());
-    authContext.setAuthorized(true);
     return new RedirectView("/users");
   }
 }

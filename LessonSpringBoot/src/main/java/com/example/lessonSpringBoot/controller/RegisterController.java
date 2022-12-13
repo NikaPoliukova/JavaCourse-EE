@@ -1,7 +1,6 @@
 package com.example.lessonSpringBoot.controller;
 
 import com.example.lessonSpringBoot.dto.UserDto;
-import com.example.lessonSpringBoot.service.HashPassServiceImpl;
 import com.example.lessonSpringBoot.service.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
