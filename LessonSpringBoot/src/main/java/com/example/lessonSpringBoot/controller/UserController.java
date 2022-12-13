@@ -35,7 +35,7 @@ public class UserController {
   @GetMapping
   public String findAllUsersByPageAndSearch(final ModelMap model, @RequestParam(name = "searchValue", required = false) String searchValue,
                                             @RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
-                                            @RequestParam(value = "pageSize", required = false, defaultValue = "2") Integer pageSize) {
+                                            @RequestParam(value = "pageSize", required = false, defaultValue = "6") Integer pageSize) {
     Page<User> page = userService.getFilteredUsers(searchValue, pageNumber - 1, pageSize);
     List<User> users = page.getContent();
     model.addAttribute("currentPage", pageNumber);
