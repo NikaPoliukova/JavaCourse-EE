@@ -8,34 +8,11 @@
 	"item": [
 		{
 			"name": "Show users",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "searchValue",
-							"value": "user",
-							"type": "text"
-						},
-						{
-							"key": "pageNumber",
-							"value": "2",
-							"type": "text"
-						},
-						{
-							"key": "pageSize",
-							"value": "1",
-							"type": "text"
-						}
-					]
-				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/users",
+					"raw": "http://localhost:8080/api/v1/users?searchValue=&pageNumber=1&pageSize=5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -45,6 +22,20 @@
 						"api",
 						"v1",
 						"users"
+					],
+					"query": [
+						{
+							"key": "searchValue",
+							"value": ""
+						},
+						{
+							"key": "pageNumber",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "5"
+						}
 					]
 				}
 			},
