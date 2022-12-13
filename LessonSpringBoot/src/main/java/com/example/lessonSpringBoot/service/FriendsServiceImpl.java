@@ -18,6 +18,10 @@ public class FriendsServiceImpl {
     return friendsRepository.getFriendsByUserIdAndStatus(userId);
   }
 
+  public List<User> getFriendsAndFriendRequests(long userId) {
+    return friendsRepository.getFriendsAndFriendRequests(userId);
+  }
+
   public List<User> findIncomingFriendRequests(long userId) {
     return friendsRepository.findIncomingFriendRequests(userId);
   }

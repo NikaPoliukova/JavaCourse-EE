@@ -23,6 +23,7 @@ import java.util.List;
 
 @Validated
 @Controller
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -30,7 +31,7 @@ public class UserController {
   private final AuthContext authContext;
   private final FriendsServiceImpl friendsService;
 
-  @GetMapping("/users")
+  @GetMapping
   public String findAllUsersByPageAndSearch(final ModelMap model, @RequestParam(name = "searchValue", required = false) String searchValue,
                                             @RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
                                             @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
@@ -46,10 +47,7 @@ public class UserController {
     model.addAttribute("searchValue", searchValueAttribute);
 
     List<Long> friendIds = new ArrayList<>();
-    List<User> friends = friendsService.getFriendsByUserIdAndStatus(authContext.getUserId());
-    for (User friend : friends) {
-      friendIds.add(friend.getUserId());
-    }
+    friendsService.getFriendsAndFriendRequests(authContext.getUserId()).forEach(f -> friendIds.add(f.getUserId()));
     model.addAttribute("friendIds", friendIds);
     return "users";
   }
@@ -58,7 +56,7 @@ public class UserController {
   @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public RedirectView createFriendRequest(@Valid @RequestParam("friendUserId") long friendUserId) {
     friendsService.createFriendRequest(authContext.getUserId(), friendUserId);
-    return new RedirectView("/users/page/1");
+    return new RedirectView("/users");
   }
 }
 

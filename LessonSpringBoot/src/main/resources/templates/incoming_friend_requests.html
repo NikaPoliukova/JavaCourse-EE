@@ -121,14 +121,14 @@
                             <td th:text="${friend.getUserName()}"/>
                             <td>
                                 <form action="#"
-                                      th:action="@{/incoming_and_added_friend_requests(addUserId=${friend.getUserId()})}"
+                                      th:action="@{/incoming_friend_requests(addUserId=${friend.getUserId()})}"
                                       method="post">
                                     <button type="submit" class="button">Add</button>
                                 </form>
                             </td>
                             <td>
                                 <form action="#"
-                                      th:action="@{/incoming_and_cancel_friend_requests(cancelUserId=${friend.getUserId()})}"
+                                      th:action="@{/incoming-and-cancel-friend-requests(cancelUserId=${friend.getUserId()})}"
                                       method="post">
                                     <button type="submit" class="button2">Cancel</button>
                                 </form>

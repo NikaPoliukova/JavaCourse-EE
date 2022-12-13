@@ -39,7 +39,7 @@ public class UserServiceImpl {
 
   public User findUserByUserNameAndPassword(String name, String password) {
     User user = userRepository.findUserByUserName(name);
-    if (hashPassService.verify(password, user.getPassword())) {
+    if (user !=null && hashPassService.verify(password, user.getPassword())) {
       return user;
     } else {
       throw new RuntimeException("enter incorrect password");
