@@ -1,12 +1,12 @@
 package com.example.lessonSpringBoot.model;
 
-import java.util.Date;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
+
+import java.util.Date;
 
 
 @Data
@@ -24,6 +24,8 @@ public class User {
 
   @Column("created_at")
   private Date createdDate;
+
+  //private List<Role> roles;
 
 
   public User(Long userId, String userName) {

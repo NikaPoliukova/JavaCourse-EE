@@ -22,9 +22,11 @@
     * {
         box-sizing: border-box;
     }
+
     body {
         background-color: #FFEBCD;
     }
+
     .container {
         padding: 16px;
         background-color: white;
@@ -81,7 +83,8 @@
             <h2>Login</h2>
             <p>Please fill in the login form.</p>
             <hr>
-            <input class="col-form-label form-control" th:filed="*{userName}" name="userName" placeholder="Enter Username">
+            <input class="col-form-label form-control" th:filed="*{userName}" name="userName"
+                   placeholder="Enter Username">
             <input type="password" th:filed="*{password}" name="password" placeholder="Enter Password">
             <hr>
             <button type="submit" class="registerbtn">Login</button>
