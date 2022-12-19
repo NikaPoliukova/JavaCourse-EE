@@ -38,6 +38,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     http.authorizeRequests().antMatchers("/login").permitAll();
     http.authorizeRequests().antMatchers("/registration").permitAll();
     http.authorizeRequests().antMatchers("/api/v1/token/refresh").permitAll();
+    http.authorizeRequests().antMatchers("/users").permitAll();
+   // http.authorizeRequests().antMatchers("/**").permitAll();
 
     http.authorizeRequests().antMatchers(GET, "api/v1/user**").hasAuthority("USER");
     http.authorizeRequests().antMatchers(POST, "api/v1/user**").hasAuthority("ADMIN");
