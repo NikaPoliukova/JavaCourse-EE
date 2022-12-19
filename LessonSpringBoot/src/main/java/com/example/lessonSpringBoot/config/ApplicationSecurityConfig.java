@@ -1,4 +1,4 @@
-package com.example.lessonSpringBoot.security;
+package com.example.lessonSpringBoot.config;
 
 import com.example.lessonSpringBoot.filter.CustomAuthenticationFilter;
 import com.example.lessonSpringBoot.filter.CustomAuthorizationFilter;
@@ -33,18 +33,19 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
+    CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean());
+    customAuthenticationFilter.setFilterProcessesUrl("/api/v1/login");
     http.csrf().disable();
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    http.authorizeRequests().antMatchers("/login").permitAll();
-    http.authorizeRequests().antMatchers("/registration").permitAll();
     http.authorizeRequests().antMatchers("/api/v1/token/refresh").permitAll();
-    http.authorizeRequests().antMatchers("/users").permitAll();
-   // http.authorizeRequests().antMatchers("/**").permitAll();
+    http.authorizeRequests().antMatchers("/api/v1/login").permitAll();
 
-    http.authorizeRequests().antMatchers(GET, "api/v1/user**").hasAuthority("USER");
-    http.authorizeRequests().antMatchers(POST, "api/v1/user**").hasAuthority("ADMIN");
+
+    http.authorizeRequests().antMatchers(GET, "/api/v1/user**").hasAuthority("USER");
+    http.authorizeRequests().antMatchers(POST, "/api/v1/user**").hasAuthority("ADMIN");
+    http.authorizeRequests().antMatchers("/**").permitAll();
     http.authorizeRequests().anyRequest().authenticated();
-    http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
+    http.addFilter(customAuthenticationFilter);
     http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
   }
 
