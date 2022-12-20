@@ -23,7 +23,7 @@ import java.util.Collection;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserDetailsService {
- 
+
   private final UserRepository userRepository;
   private final HashPassServiceImpl hashPassService;
   private final PasswordEncoder passwordEncoder;
@@ -37,23 +37,18 @@ public class UserServiceImpl implements UserDetailsService {
     }
   }
 
-  public void saveUser(User user) {
-    userRepository.save(user);
-  }
-
   @Transactional
   public void addUser(String userName, String password) {
     if (userRepository.findUserByUserName(userName) != null) {
       throw new RuntimeException("This user already exists");
     }
-    //String hashPass = hashPassService.hashPass(password);
     String hashPass = passwordEncoder.encode(password);
     userRepository.addUser(userName, hashPass);
   }
 
   public User findUserByUserNameAndPassword(String name, String password) {
     User user = userRepository.findUserByUserName(name);
-    if (user !=null && hashPassService.verify(password, user.getPassword())) {
+    if (user != null && hashPassService.verify(password, user.getPassword())) {
       return user;
     } else {
       throw new RuntimeException("enter incorrect password");
@@ -73,7 +68,7 @@ public class UserServiceImpl implements UserDetailsService {
       log.info("user found in database");
     }
     Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-    authorities.add(new SimpleGrantedAuthority("USER"));//TODO user's ROLE
+    authorities.add(new SimpleGrantedAuthority("USER"));
     return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), authorities);
   }
 }

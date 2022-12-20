@@ -25,6 +25,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
   private  final UserDetailsService userDetailsService;
   private final BCryptPasswordEncoder bCryptPasswordEncoder;
+  private final JwtConfig jwtConfig;
 
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -33,7 +34,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean());
+    CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean(), jwtConfig);
     customAuthenticationFilter.setFilterProcessesUrl("/api/v1/login");
     http.csrf().disable();
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -46,7 +47,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     http.authorizeRequests().antMatchers("/**").permitAll();
     http.authorizeRequests().anyRequest().authenticated();
     http.addFilter(customAuthenticationFilter);
-    http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+    http.addFilterBefore(new CustomAuthorizationFilter(jwtConfig), UsernamePasswordAuthenticationFilter.class);
   }
 
   @Bean

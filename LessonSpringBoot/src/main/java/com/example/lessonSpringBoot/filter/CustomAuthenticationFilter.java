@@ -2,8 +2,9 @@ package com.example.lessonSpringBoot.filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.example.lessonSpringBoot.config.JwtConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,13 +25,17 @@ import java.util.stream.Collectors;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@Slf4j
+@Log4j2
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
   private final AuthenticationManager authenticationManager;
-  public CustomAuthenticationFilter(AuthenticationManager authenticationManager) {
+  private final JwtConfig jwtConfig;
+
+  public CustomAuthenticationFilter(AuthenticationManager authenticationManager, JwtConfig jwtConfig) {
     this.authenticationManager = authenticationManager;
+    this.jwtConfig = jwtConfig;
   }
+
 
   @Override
   public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
@@ -44,7 +49,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
   @Override
   protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
     User user = (User) authentication.getPrincipal();
-    Algorithm algorithm = Algorithm.HMAC256("secret".getBytes()); //TODO remove secret
+    Algorithm algorithm = Algorithm.HMAC256(jwtConfig.getSecretKey().getBytes());
     String accessToken = JWT.create()
         .withSubject(user.getUsername())
         .withExpiresAt(new Date(System.currentTimeMillis() +  60 * 1000))
