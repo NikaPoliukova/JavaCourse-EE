@@ -129,51 +129,26 @@
     </style>
 </head>
 <body>
-<h1>Messages</h1>
+<h1>Send message for friend</h1>
 </div>
 <div class="container p-30">
     <div class="row">
         <div class="col-md-12 main-datatable">
             <div class="card_body">
             </div>
-            <div class="overflow-x">
-                <table style="width:100%;"
-                       id="filtertable"
-                       class="table cust-datatable dataTable no-footer"
-                       aria-describedby="users">
-                    <thead>
-                    <tr>
-                        <th style="min-width:150px;">Date send</th>
-                        <th style="min-width:50px;">Text message</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="friend: ${friends}" th:if="${friend.getUserId() != myUserId}">
-                        <td th:text="${friend.getUserId()}"/>
-                        <td th:text="${friend.getUserName()}"/>
-                        <td>
-                            <form action="#" th:action="@{/friends}" method="post">
-                                <input type="hidden" th:value="${friend.getUserId()}" name="targetUserId"/>
-                                <button type='submit' class="button">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
             <div class="container">
                 <form action="/action_page.php">
                     <div class="row">
                         <div class="col-25">
-                            <label for="subject">Текст сообщения</label>
+                            <label for="subject">Text message</label>
                         </div>
                         <div class="col-75">
-                            <textarea id="subject" name="subject" placeholder="Написать что нибудь.."
+                            <textarea id="subject" name="subject" placeholder="Write something.."
                                       style="height:200px"></textarea>
                         </div>
                     </div>
                     <div class="row">
-                        <input type="submit" value="Отправить">
+                        <input type="submit" value="Send">
                     </div>
                 </form>
             </div>
