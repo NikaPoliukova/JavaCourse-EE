@@ -38,7 +38,7 @@ public class FriendsController {
 
   @SneakyThrows
   @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-  public RedirectView createFriendRequest(@Valid @RequestParam("targetUserId") long targetUserId) {
+  public RedirectView cancelFriendRequest(@Valid @RequestParam("targetUserId") long targetUserId) {
     friendsService.cancelFriendship(authContext.getUserId(), targetUserId);
     return new RedirectView("/friends");
   }

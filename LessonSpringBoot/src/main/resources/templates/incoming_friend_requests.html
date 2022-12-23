@@ -121,7 +121,7 @@
                             <td th:text="${friend.getUserName()}"/>
                             <td>
                                 <form action="#"
-                                      th:action="@{/incoming_friend_requests(addUserId=${friend.getUserId()})}"
+                                      th:action="@{/incoming-and-added-friend-requests(addUserId=${friend.getUserId()})}"
                                       method="post">
                                     <button type="submit" class="button">Add</button>
                                 </form>

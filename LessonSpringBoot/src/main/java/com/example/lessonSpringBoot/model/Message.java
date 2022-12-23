@@ -13,6 +13,6 @@ import java.time.LocalDateTime;
 public class Message {
   Long sourceUserId;
   Long targetUserId;
-  String messageText;
+  String messageContent;
   LocalDateTime createdAt;
 }

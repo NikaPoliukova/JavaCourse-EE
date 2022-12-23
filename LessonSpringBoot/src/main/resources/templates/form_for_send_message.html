@@ -129,32 +129,11 @@
     </style>
 </head>
 <body>
-<h1>Send message for friend</h1>
-</div>
-<div class="container p-30">
-    <div class="row">
-        <div class="col-md-12 main-datatable">
-            <div class="card_body">
-            </div>
-            <div class="container">
-                <form action="/action_page.php">
-                    <div class="row">
-                        <div class="col-25">
-                            <label for="subject">Text message</label>
-                        </div>
-                        <div class="col-75">
-                            <textarea id="subject" name="subject" placeholder="Write something.."
-                                      style="height:200px"></textarea>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <input type="submit" value="Send">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+<form action="#" th:action="@{/message}" method="post">
+    <input type="text" name="message" placeholder="Write text..."/>
+    <input type="hidden" th:value="${targetUserId}" name="targetUserId"/>
+    <button type="submit">Send</button>
+</form>
 </body>
 </html>
 

@@ -16,12 +16,39 @@
             width: 100%;
             border: 1px solid #ddd;
         }
+
         body {
             background-color: #FFEBCD;
         }
 
         .button {
             background-color: red;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .button2 {
+            background-color: green;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .button3 {
+            background-color: cornflowerblue;
             border: none;
             color: white;
             padding: 10px 15px;
@@ -41,6 +68,7 @@
         tr:nth-child(even) {
             background-color: #f2f2f2
         }
+
         body {
             background-color: #F0F8FF;
         }
@@ -58,7 +86,8 @@
             text-decoration: none;
             font-size: 17px;
         }
-        header{
+
+        header {
             border-width: 2px;
         }
 
@@ -110,6 +139,18 @@
                                 <form action="#" th:action="@{/friends}" method="post">
                                     <input type="hidden" th:value="${friend.getUserId()}" name="targetUserId"/>
                                     <button type='submit' class="button">Delete</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="#" th:action="@{/form-for-send-message}" method="post">
+                                    <input type="hidden" th:value="${friend.getUserId()}" name="targetUserId"/>
+                                    <button type='submit' class="button2">Send message</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="#" th:action="@{/chat-with-friend}" method="post">
+                                    <input type="hidden" th:value="${friend.getUserId()}" name="targetUserId"/>
+                                    <button type='submit' class="button3">Messages</button>
                                 </form>
                             </td>
                         </tr>
