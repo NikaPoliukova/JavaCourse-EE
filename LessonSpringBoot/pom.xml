@@ -96,7 +96,12 @@
             <artifactId>mapstruct</artifactId>
             <version>${org.mapstruct.version}</version>
         </dependency>
-    </dependencies>
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk-s3</artifactId>
+                <version>1.12.371</version>
+            </dependency>
+        </dependencies>
     <build>
         <plugins>
             <plugin>
@@ -133,4 +138,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

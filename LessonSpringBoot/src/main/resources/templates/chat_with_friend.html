@@ -72,7 +72,12 @@
         }
     </style>
 </head>
-<body>
+<body onload="active()">
+<link rel="import" href="header.html">
+<div th:insert="~{header :: header}"></div>
+<div class="container-fluid text-center wrapper">
+    <br class="row content">
+    <div class="col-sm-8 text-left mainContent">
 <h1>Messages with friend</h1>
 </div>
 <div class="container p-30">

@@ -49,5 +49,9 @@ public class UserServiceImpl {
   public User findUserByUserName(String userName) {
     return userRepository.findUserByUserName(userName);
   }
+
+  public User findUserByUserId(long targetUserId) {
+    return userRepository.findUserByUserId(targetUserId);
+  }
 }
 
