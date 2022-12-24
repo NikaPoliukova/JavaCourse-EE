@@ -1,7 +1,6 @@
 package com.example.lessonSpringBoot.controller;
 
 import com.example.lessonSpringBoot.dto.UserDto;
-import com.example.lessonSpringBoot.model.User;
 import com.example.lessonSpringBoot.service.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
@@ -25,7 +24,6 @@ public class RegisterController {
 
   private final UserServiceImpl userService;
 
-
   @GetMapping
   protected String userRegistration(Model model) {
     model.addAttribute("dto", new UserDto());
@@ -34,7 +32,6 @@ public class RegisterController {
 
   @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   protected RedirectView userRegistration(@Valid @ModelAttribute("dto") UserDto dto) {
-    User user = new User(dto.getUserName(), dto.getPassword());
     userService.addUser(dto.getUserName(), dto.getPassword());
     return new RedirectView("/login");
   }
