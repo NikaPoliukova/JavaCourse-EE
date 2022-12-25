@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
@@ -23,7 +24,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean(), secretKey);
-    customAuthenticationFilter.setFilterProcessesUrl("/api/v1/login");
+    //customAuthenticationFilter.setFilterProcessesUrl("/api/v1/login");
     http.csrf().disable();
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.authorizeRequests().antMatchers("/api/v1/token/refresh").permitAll();
@@ -33,7 +34,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     http.authorizeRequests().antMatchers(GET, "/api/v1/user**").hasAuthority("USER");
     http.authorizeRequests().antMatchers(POST, "/api/v1/user**").hasAuthority("ADMIN");
     http.authorizeRequests().antMatchers("/**").permitAll();
-    http.addFilter(customAuthenticationFilter);
+    http.addFilterAt(customAuthenticationFilter, BasicAuthenticationFilter.class);
     http.addFilterBefore(new CustomAuthorizationFilter(secretKey), UsernamePasswordAuthenticationFilter.class);
   }
 }
