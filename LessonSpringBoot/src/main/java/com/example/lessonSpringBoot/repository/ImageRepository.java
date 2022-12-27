@@ -18,6 +18,10 @@ public interface ImageRepository extends Repository<Image, Long> {
   void updateImage(@Param("imageName") String imageName, @Param("userId") long userId);
 
   @Query("select image_name from image where user_id=:userId")
-  void getImageByUserId(@Param("userId") long userId);
+  String getImageNameByUserId(@Param("userId") long userId);
+
+  @Modifying
+  @Query("delete image where user_id=:userId")
+  void deleteImage( @Param("userId") long userId);
 }
 

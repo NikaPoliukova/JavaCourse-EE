@@ -9,5 +9,5 @@ public interface StorageService {
 
   URI getImagePath(String imageName) throws URISyntaxException;
 
-  void deleteImage(String oldImage);
+  void deleteImage(long userId);
 }

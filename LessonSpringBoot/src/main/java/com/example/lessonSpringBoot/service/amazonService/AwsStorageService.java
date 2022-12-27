@@ -16,9 +16,11 @@ import java.net.URISyntaxException;
 @Service
 @RequiredArgsConstructor
 public class AwsStorageService implements StorageService {
+
   private final AmazonS3 client;
   @Value("${aws.image-placeholder-path}")
   private String placeholderPath;
+
   @Override
   public void uploadFile(InputStream stream, String fileName) {
     PutObjectRequest request = new PutObjectRequest("imgbucket", fileName, stream, new ObjectMetadata());

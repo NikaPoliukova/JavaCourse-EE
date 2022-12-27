@@ -27,7 +27,7 @@ public class ProfileController {
   @PostMapping("/profile")
   protected String getProfile(Model model, @Valid @RequestParam("userId") long userId) throws URISyntaxException {
     User user = userService.findUserByUserId(userId);
-    URI imageUrl = imageService.getImagePath(user.getImageName());
+    URI imageUrl = imageService.getImagePath(imageService.getImageNameByUserId(userId));
     long authorizationUserId = authContext.getUserId();
     model.addAttribute("user", user);
     model.addAttribute("imageUrl", imageUrl);
