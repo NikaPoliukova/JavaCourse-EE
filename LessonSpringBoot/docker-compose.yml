@@ -9,14 +9,17 @@ services:
       POSTGRES_DB: "social_network"
     ports:
       - "35432:5432"
+
   localstack:
-    container_name: "LocalStack-Demo"
-    image: localstack/localstack
-    network_mode: bridge
+    container_name: "LocalStack"
+    image: localstack/localstack:latest
     ports:
       - "4566:4566" # Edge Port
-      - "4569:4569" # Dynamo DB Port
-      - "4571:4571" # Elasticsearch Port
       - "4572:4572" # S3 Port
-      - "4574:4574" # Lambda Port
-      - "8080:8080" # Web-UI Port
+    environment:
+      - SERVICES:s3
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - ./scripts/localstack:/docker-entrypoint-initaws.d

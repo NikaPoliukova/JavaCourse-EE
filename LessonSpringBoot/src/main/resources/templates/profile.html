@@ -98,12 +98,12 @@
 <div class="container-fluid text-center wrapper">
     <br class="row content">
     <div class="col-sm-8 text-left mainContent">
-        <img src="https://example.com/pic_mountain.jpg" alt="Mountain View" style="width:304px;height:228px">
+        <img th:src="${imageUrl}" alt="Card image cap">
 
         <table id="customers">
             <tr>
                 <th>Данные о пользователе</th>
-                <td>
+                <td th:if="${user.getUserId() == authorizationUserId}">
                     <div>
                         <form action="#" th:action="@{/setting-information}" method="post">
                             <input type="hidden" th:value="${user.getUserId()}" name="userId"/>

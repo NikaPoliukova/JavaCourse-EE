@@ -3,7 +3,7 @@ CREATE TABLE users
     user_id     BIGSERIAL NOT NULL UNIQUE,
     username    VARCHAR   NOT NULL UNIQUE,
     password    VARCHAR   NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT now()
+    created_at TIMESTAMP NOT NULL DEFAULT now(),
 );
 
 INSERT INTO users ( username, password)

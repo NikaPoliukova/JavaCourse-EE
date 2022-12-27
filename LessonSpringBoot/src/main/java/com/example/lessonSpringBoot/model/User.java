@@ -25,6 +25,9 @@ public class User {
   @Column("created_at")
   private Date createdDate;
 
+  @Column("image_name")
+  private String imageName;
+
 
   public User(Long userId, String userName) {
     this.userId = userId;

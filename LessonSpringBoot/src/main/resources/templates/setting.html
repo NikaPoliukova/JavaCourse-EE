@@ -152,6 +152,15 @@
                 <div class="overflow-x">
                     <table id="customers">
                         <tr th:value="${user}">
+                            <td style="min-width:50px;"> Profile image</td>
+                           <td>
+                               <form action="#" th:action="@{/setting-image}" method="post">
+                                   <input type="hidden" th:value="${user.getUserId()}" name="userId"/>
+                                   <input type="submit" class="btn" value="change">
+                               </form>
+                           </td>
+                        </tr>
+                        <tr th:value="${user}">
                             <td style="min-width:50px;">Id user</td>
                             <td th:text="${user.getUserId()}"/>
                         </tr>
@@ -159,12 +168,10 @@
                             <td style="min-width:50px;">Username</td>
                             <td th:text="${user.getUserName}"></td>
                             <td><input type="text" id="cname" name="cardname" placeholder="enter for change"><button type="submit" class="registerbtn">change</button> </td>
-
-
                         </tr>
                         <tr>
                             <td style="min-width:50px;">Age</td>
-                            <td style="min-width:50px;">15   </td>
+                            <td style="min-width:50px;">15</td>
                             <td><input type="text" id="cname" name="cardname" placeholder="enter for change"><button type="submit" class="registerbtn">change</button> </td>
 
                         </tr>
@@ -180,7 +187,8 @@
                                         <a href="#">Male</a>
                                         <a href="#">Female</a>
                                     </div>
-                                </div> </td>
+                                </div>
+                            </td>
 
                         </tr>
                         <tr>
