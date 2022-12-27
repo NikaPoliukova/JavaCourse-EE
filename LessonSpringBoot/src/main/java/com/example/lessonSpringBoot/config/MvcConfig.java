@@ -24,11 +24,13 @@ public class MvcConfig implements WebMvcConfigurer {
     registry.addViewController("/login").setViewName("login");
     registry.addViewController("/outgoing-friend-requests").setViewName("outgoing-friend-requests");
     registry.addViewController("/registration").setViewName("registration");
+    registry.addViewController("/form_for_send_message").setViewName("form_for_send_message");
+    registry.addViewController("/chat_with_friend").setViewName("chat_with_friend");
   }
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(new MappedInterceptor(new String[]{"/users", "/friends", "/incoming-friend-requests",
-        "/outgoing-friend-requests"}, new AuthInterceptor(authContext)));
+        "/outgoing-friend-requests", "/chat_with_friend", "/form_for_send_message"}, new AuthInterceptor(authContext)));
   }
 }

@@ -1,0 +1,116 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        body {
+            background-color: #FFEBCD;
+        }
+
+        .button {
+            background-color: red;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 16px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
+        body {
+            background-color: #F0F8FF;
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: #555;
+            overflow: auto;
+        }
+
+        .navbar a {
+            float: left;
+            padding: 12px;
+            color: white;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        header {
+            border-width: 2px;
+        }
+
+        .navbar a:hover {
+            background-color: #000;
+        }
+
+        .active {
+            background-color: #04AA6D;
+        }
+
+        @media screen and (max-width: 500px) {
+            .navbar a {
+                float: none;
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body onload="active()">
+<link rel="import" href="header.html">
+<div th:insert="~{header :: header}"></div>
+<div class="container-fluid text-center wrapper">
+    <br class="row content">
+    <div class="col-sm-8 text-left mainContent">
+<h1>Messages with friend</h1>
+</div>
+<div class="container p-30">
+    <div class="row">
+        <div class="col-md-12 main-datatable">
+            <div class="card_body">
+            </div>
+            <div class="overflow-x">
+                <table style="width:100%;"
+                       id="filtertable"
+                       class="table cust-datatable dataTable no-footer"
+                       aria-describedby="users">
+                    <thead>
+                    <tr>
+                        <th style="min-width:150px;">Sender</th>
+                        <th style="min-width:150px;">Recipient</th>
+                        <th style="min-width:150px;">Date send</th>
+                        <th style="min-width:50px;">Text message</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="message: ${listMessages}">
+                        <td th:text="${message.getSourceUserId()}"/>
+                        <td th:text="${message.getTargetUserId}"/>
+                        <td th:text="${message.getCreatedAt()}"/>
+                        <td th:text="${message.getMessageContent}"/>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

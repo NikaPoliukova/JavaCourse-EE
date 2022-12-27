@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-
 public interface FriendsRepository extends Repository<User, Long> {
 
   @Query(value = "select * from friends f join users u on (u.user_id = f.target_user_id or u.user_id = f.source_user_id) " +

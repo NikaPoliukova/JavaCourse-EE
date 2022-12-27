@@ -9,8 +9,20 @@ CREATE TABLE friends
 
     PRIMARY KEY (id)
 );
-INSERT INTO friends (source_user_id, target_user_id)
-VALUES (2, 1);
-INSERT INTO friends (source_user_id, target_user_id)
-VALUES (1, 3);
+INSERT INTO friends (source_user_id, target_user_id, status)
+VALUES (2, 1, 'APPROVED');
+INSERT INTO friends (source_user_id, target_user_id,status)
+VALUES (1, 3, 'APPROVED');
+INSERT INTO friends (source_user_id, target_user_id, status)
+VALUES (2, 3, 'APPROVED');
+INSERT INTO friends (source_user_id, target_user_id, status)
+VALUES (4, 3, 'APPROVED');
+INSERT INTO friends (source_user_id, target_user_id, status)
+VALUES (5, 3, 'APPROVED');
+INSERT INTO friends (source_user_id, target_user_id, status)
+VALUES (1, 4, 'APPROVED');
+INSERT INTO friends (source_user_id, target_user_id, status)
+VALUES (1, 5,'APPROVED');
+INSERT INTO friends (source_user_id, target_user_id, status)
+VALUES (1, 6, 'APPROVED');
 

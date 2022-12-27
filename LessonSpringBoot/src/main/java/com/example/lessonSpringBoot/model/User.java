@@ -8,6 +8,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.Date;
 
+
 @Data
 @NoArgsConstructor
 @Table(name = "users")
@@ -23,6 +24,7 @@ public class User {
 
   @Column("created_at")
   private Date createdDate;
+
 
   public User(Long userId, String userName) {
     this.userId = userId;

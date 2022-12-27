@@ -3,7 +3,7 @@ CREATE TABLE users
     user_id     BIGSERIAL NOT NULL UNIQUE,
     username    VARCHAR   NOT NULL UNIQUE,
     password    VARCHAR   NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT now()
+    created_at TIMESTAMP NOT NULL DEFAULT now(),
 );
 
 INSERT INTO users ( username, password)
@@ -12,4 +12,12 @@ INSERT INTO users ( username, password)
 VALUES ('user2', '$2a$12$WsnlLBmoEmgGzwkx.2sbF.Kkv28AzH2GOx6ZJsDdlBoMidv4R0ZDu');
 INSERT INTO users ( username, password)
 VALUES ('user3', '$2a$12$J6ugEhxhQTfDcIO5uXq14Oi5ecplwx9qTlQceLwysnWqJho1gxPVC');
+INSERT INTO users ( username, password)
+VALUES ('user4', '$2a$12$J6ugEhxhQTfDcIO5uXq14Oi5ecplwx9qTlQceLwysnWqJho1gxPVC');
+INSERT INTO users ( username, password)
+VALUES ('user5', '$2a$12$J6ugEhxhQTfDcIO5uXq14Oi5ecplwx9qTlQceLwysnWqJho1gxPVC');
+INSERT INTO users ( username, password)
+VALUES ('user6', '$2a$12$J6ugEhxhQTfDcIO5uXq14Oi5ecplwx9qTlQceLwysnWqJho1gxPVC');
+INSERT INTO users ( username, password)
+VALUES ('user7', '$2a$12$J6ugEhxhQTfDcIO5uXq14Oi5ecplwx9qTlQceLwysnWqJho1gxPVC');
 

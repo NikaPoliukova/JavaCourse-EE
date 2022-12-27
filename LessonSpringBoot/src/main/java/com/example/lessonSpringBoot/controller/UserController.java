@@ -59,5 +59,6 @@ public class UserController {
     friendsService.createFriendRequest(authContext.getUserId(), friendUserId);
     return new RedirectView("/users");
   }
+
 }
 

@@ -22,4 +22,6 @@ public interface UserRepository extends Repository<User, Long> {
 
   User findUserByUserName(@Param("userName") String userName);
 
+  User findUserByUserId(long targetUserId);
 }
+

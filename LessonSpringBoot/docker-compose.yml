@@ -9,3 +9,17 @@ services:
       POSTGRES_DB: "social_network"
     ports:
       - "35432:5432"
+
+  localstack:
+    container_name: "LocalStack"
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566" # Edge Port
+      - "4572:4572" # S3 Port
+    environment:
+      - SERVICES:s3
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - ./scripts/localstack:/docker-entrypoint-initaws.d

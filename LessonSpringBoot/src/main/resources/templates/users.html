@@ -98,6 +98,19 @@
             background-color: #ddd;
             border-radius: 5px;
         }
+
+        .button2 {
+            background-color: cornflowerblue;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body onload="active()">
@@ -111,59 +124,68 @@
             <input type="text" name="searchValue" placeholder="Поиск пользователя..."/>
             <button type="submit">Поиск</button>
         </form>
-    </div>
-    <div class="container p-30">
-        <div class="row">
-            <div class="col-md-12 main-datatable">
-                <div class="card_body">
-                </div>
-                <div class="overflow-x">
-                    <table style="width:100%;"
-                           id="filtertable"
-                           class="table cust-datatable dataTable no-footer"
-                           aria-describedby="users">
-                        <thead>
-                        <tr>
-                            <th style="min-width:50px;">User id</th>
-                            <th style="min-width:150px;">Name</th>
-                            <th style="min-width:100px;">Date created</th>
-                            <th style="min-width:100px;">Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="user: ${users}">
-                            <td th:text="${user.getUserId()}"/>
-                            <td th:text="${user.getUserName()}"/>
-                            <td th:text="${user.getCreatedDate()}"/>
-                            <td th:if="${user.getUserId() != myUserId and !(#lists.contains(friendIds, user.getUserId()))}">
-                                <div style="width: 70px">
-                                    <form action="#" th:action="@{/users}" method="post">
-                                        <input type="hidden" th:value="${user.getUserId()}" name="friendUserId"/>
-                                        <input type="submit" class="button" value="Add to friends">
+
+        <div class="container p-30">
+            <div class="row">
+                <div class="col-md-12 main-datatable">
+                    <div class="card_body">
+                    </div>
+                    <div class="overflow-x">
+                        <table style="width:100%;"
+                               id="filtertable"
+                               class="table cust-datatable dataTable no-footer"
+                               aria-describedby="users">
+                            <thead>
+                            <tr>
+                                <th style="min-width:50px;">User id</th>
+                                <th style="min-width:150px;">Name</th>
+                                <th style="min-width:100px;">Date created</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="user: ${users}">
+                                <td th:text="${user.getUserId()}"/>
+                                <td th:text="${user.getUserName()}"/>
+                                <td th:text="${user.getCreatedDate()}"/>
+                                <td th:if="${user.getUserId() != myUserId and !(#lists.contains(friendIds, user.getUserId()))}">
+                                    <div style="width: 70px">
+                                        <form action="#" th:action="@{/users}" method="post">
+                                            <input type="hidden" th:value="${user.getUserId()}" name="friendUserId"/>
+                                            <input type="submit" class="button" value="Add to friends">
+                                        </form>
+                                    </div>
+                                </td>
+                                <td>
+                                    <form action="#" th:action="@{/profile}" method="post">
+                                        <input type="hidden" th:value="${user.getUserId()}" name="userId"/>
+                                        <input type="submit" class="button2" value="Profile">
                                     </form>
-                                </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <nav aria-label="Page navigation example">
-                        Total Items [[${totalItems}]]
-                        <ul class="pagination">
-                                <a class="page-link" th:if="${currentPage > 1}" th:href="@{'/users?pageNumber='+ ${currentPage - 1} + '&searchValue='+ ${searchValue}}">Previous</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <nav aria-label="Page navigation example">
+                            Total Items [[${totalItems}]]
+                            <ul class="pagination">
+                                <a class="page-link" th:if="${currentPage > 1}"
+                                   th:href="@{'/users?pageNumber='+ ${currentPage - 1} + '&searchValue='+ ${searchValue}}">Previous</a>
                                 <span th:unless="${currentPage > 1}"></span>
 
                                 <a class="page-link" th:if="${currentPage ==1}" th:href="@{/users}">1</a>
                                 <span th:unless="${currentPage > 1}"></span>
 
                                 <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-                                    <a class="page-link" th:if="${i != currentPage}" th:href="@{'/users?pageNumber='+ ${i} + '&searchValue=' + ${searchValue}}">[[${i}]]</a>
+                                    <a class="page-link" th:if="${i != currentPage}"
+                                       th:href="@{'/users?pageNumber='+ ${i} + '&searchValue=' + ${searchValue}}">[[${i}]]</a>
                                <span th:unless="${i != currentPage}"></span>
                                 </span>
 
-                                <a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/users?pageNumber=' + ${totalPages}}">Last</a>
+                                <a class="page-link" th:if="${currentPage < totalPages}"
+                                   th:href="@{'/users?pageNumber=' + ${totalPages}}">Last</a>
                                 <span th:unless="${currentPage < totalPages}"></span>
-                        </ul>
-                    </nav>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>
