@@ -24,7 +24,6 @@ public class RegisterController {
 
   private final UserServiceImpl userService;
 
-
   @GetMapping
   protected String userRegistration(Model model) {
     model.addAttribute("dto", new UserDto());

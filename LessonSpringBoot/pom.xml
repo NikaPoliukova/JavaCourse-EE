@@ -106,7 +106,18 @@
             <artifactId>aws-java-sdk-s3</artifactId>
             <version>1.12.334</version>
         </dependency>
-        </dependencies>
+            <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <version>${spring-boot-starter-web.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.10.3</version>
+        </dependency>
+
+    </dependencies>
     <build>
         <plugins>
             <plugin>
@@ -143,5 +154,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
