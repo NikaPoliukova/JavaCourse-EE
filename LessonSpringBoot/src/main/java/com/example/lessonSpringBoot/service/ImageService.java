@@ -1,7 +1,7 @@
 package com.example.lessonSpringBoot.service;
 
 import com.example.lessonSpringBoot.repository.ImageRepository;
-import com.example.lessonSpringBoot.service.amazonService.StorageService;
+import com.example.lessonSpringBoot.service.amazonService.AwsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.net.URISyntaxException;
 @Service
 @RequiredArgsConstructor
 public class ImageService {
-  private final StorageService storageService;
+  private final AwsService storageService;
   private final ImageRepository imageRepository;
 
 
@@ -36,7 +36,8 @@ public class ImageService {
     storageService.uploadFile(stream, fileName);
   }
   public void deleteImage(long userId) {
-    storageService.deleteImage(userId);
+    String imageName = imageRepository.getImageNameByUserId(userId);
+    storageService.deleteImage(imageName);
     imageRepository.deleteImage(userId);
   }
 }

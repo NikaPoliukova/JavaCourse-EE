@@ -5,25 +5,21 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 
 public class AwsConfig {
-  @Value("${aws.s3.endpoint}")
-  private String endpointUrl;
-  @Value("${aws.region}")
-  private String region;
+  public final String AWS_REGION = "us-east-1";
+  public final String S3_ENDPOINT = "http://localhost:4572";
+
 
   @Bean
-  AmazonS3 amazonS3() {
+  AmazonS3 amazonS3client() {
     BasicAWSCredentials credentials = new BasicAWSCredentials("foo", "bar");
-
-    AwsClientBuilder.EndpointConfiguration config = new AwsClientBuilder.EndpointConfiguration(endpointUrl, region);
-
-    AmazonS3ClientBuilder builder = AmazonS3ClientBuilder.standard();
-    builder.withEndpointConfiguration(config);
-    builder.withPathStyleAccessEnabled(true);
-    builder.withCredentials(new AWSStaticCredentialsProvider(credentials));
+    AwsClientBuilder.EndpointConfiguration client = new AwsClientBuilder.EndpointConfiguration(S3_ENDPOINT, AWS_REGION);
+    AmazonS3ClientBuilder builder = AmazonS3ClientBuilder.standard()
+        .withEndpointConfiguration(client)
+        .withPathStyleAccessEnabled(true)
+        .withCredentials(new AWSStaticCredentialsProvider(credentials));
     return builder.build();
   }
 }
