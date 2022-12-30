@@ -1,13 +1,12 @@
-package com.example.lessonSpringBoot;
+package com.example.messages;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
-
 @SpringBootApplication
-public class UsersApplication {
+public class MessageApplication {
   public static void main(final String[] args) {
-    SpringApplication.run(UsersApplication.class, args);
+    SpringApplication.run(MessageApplication.class, args);
   }
 }

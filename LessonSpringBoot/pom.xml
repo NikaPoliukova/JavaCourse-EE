@@ -9,6 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>LessonSpringBoot</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>user-service</module>
+        <module>message-service</module>
+    </modules>
     <properties>
         <maven.compiler.source>14</maven.compiler.source>
         <maven.compiler.target>14</maven.compiler.target>
@@ -20,6 +25,8 @@
         <spring-boot-starter-web.version>2.7.5</spring-boot-starter-web.version>
         <lombok-mapstruct.version>0.2.0</lombok-mapstruct.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
+        <spring.cloud.starter.openfeign>3.1.4</spring.cloud.starter.openfeign>
+        <feign.httpclient>11.8</feign.httpclient>
     </properties>
     <dependencies>
         <dependency>
@@ -114,9 +121,26 @@
             <artifactId>java-jwt</artifactId>
             <version>3.10.3</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>${spring.cloud.starter.openfeign}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-httpclient</artifactId>
+            <version>${feign.httpclient}</version>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>com.amazonaws</groupId>
                 <artifactId>aws-java-sdk-bom</artifactId>
@@ -126,6 +150,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <build>
         <plugins>
             <plugin>

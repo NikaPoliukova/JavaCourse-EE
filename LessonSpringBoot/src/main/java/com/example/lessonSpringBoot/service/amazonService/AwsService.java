@@ -41,7 +41,7 @@ public class AwsService {
   }
 
   public void deleteImage(String oldImage) {
-    DeleteObjectRequest request = new DeleteObjectRequest("imgbucket", oldImage);
+    DeleteObjectRequest request = new DeleteObjectRequest("bucket1", oldImage);
     client.deleteObject(request);
   }
 }
