@@ -24,6 +24,6 @@ public interface UserRepository extends Repository<User, Long> {
 
   @Modifying
   @Query( "update users set username =:userName where user_id =:userId ")
-  User updateUserName(@Param("userName") String userName,@Param("userId") long userId);
+  void updateUserName(@Param("userName") String userName,@Param("userId") long userId);
 }
 

@@ -148,6 +148,7 @@
                                     <input type="hidden" th:value="${user.getUserId()}" name="userId"/>
                                     <div class="file-upload-wrapper">
                                         <input id="file" name="file" type="file" accept=".gif,.jpg,.jpeg,.png">
+                                        <input type="submit" class="btn" value="upload image">
                                     </div>
                                 </form>
                             </td>
@@ -167,7 +168,8 @@
                             <td th:text="${user.getUserName}"></td>
                             <td>
                                 <form action="#" th:action="@{/setting-correct-name}" method="post">
-                                    <input type="text" id="cname" name="cardname" placeholder="enter for change">
+                                    <input type="hidden" th:value="${user.getUserId()}" name="userId"/>
+                                    <input type="text" name="userName" placeholder="enter for change"/>
                                     <button type="submit" class="btn">change</button>
                                 </form>
                             </td>
@@ -175,7 +177,8 @@
                         <tr>
                             <td style="min-width:50px;">Age</td>
                             <td style="min-width:50px;">15</td>
-                            <td><input type="text" id="cname" name="cardname" placeholder="enter for change">
+                            <td>
+                                <input type="text" name="cardname" placeholder="enter for change">
                                 <button type="submit" class="btn">change</button>
                             </td>
 

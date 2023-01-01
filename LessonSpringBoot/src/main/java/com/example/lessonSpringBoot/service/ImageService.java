@@ -15,7 +15,6 @@ public class ImageService {
   private final AwsService storageService;
   private final ImageRepository imageRepository;
 
-
   public void setNewImage(String imageName, long userId) {
     imageRepository.setNewImage(imageName, userId);
   }
@@ -34,11 +33,12 @@ public class ImageService {
 
   public void upload(InputStream stream, String fileName) {
     storageService.uploadFile(stream, fileName);
+
   }
   public void deleteImage(long userId) {
     String imageName = imageRepository.getImageNameByUserId(userId);
     storageService.deleteImage(imageName);
     imageRepository.deleteImage(userId);
   }
-}
+ }
 

@@ -20,7 +20,6 @@ public interface ImageRepository extends Repository<Image, Long> {
   String getImageNameByUserId(@Param("userId") long userId);
 
   @Modifying
-  @Query("delete image where user_id=:userId")
-  void deleteImage( @Param("userId") long userId);
+  @Query("delete from image where user_id=:userId")
+  void deleteImage(@Param("userId") long userId);
 }
-
