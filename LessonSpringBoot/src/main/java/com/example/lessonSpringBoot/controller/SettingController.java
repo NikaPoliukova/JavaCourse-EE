@@ -32,9 +32,11 @@ public class SettingController {
   }
 
   @PostMapping("/setting-correct-name")
-  protected String updateNameInProfile(@Valid @RequestParam("userId") long userId,
-                                       @RequestParam(required = false) String userName) {
+  protected String updateNameInProfile(Model model, @RequestParam("userId") long userId,
+                                       @RequestParam(required = false, name = "userName") String userName) {
+    User user = userService.findUserByUserId(userId);
     profileService.updateUserName(userName, userId);
+    model.addAttribute("user", user);
     return "setting";
   }
 
@@ -45,9 +47,11 @@ public class SettingController {
     profileService.addNewProfileImage(userId, file);
     return "setting";
   }
+
   @PostMapping("/setting-delete-image")
   protected String deleteImageInProfile(@Valid @RequestParam("userId") long userId) {
     imageService.deleteImage(userId);
     return "setting";
   }
+
 }

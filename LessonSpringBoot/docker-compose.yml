@@ -2,7 +2,7 @@ version: "3"
 services:
   postgres:
     image: "postgres:13.4-alpine"
-    container_name: "postgres"
+    container_name: "demo-postgres"
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
@@ -19,7 +19,6 @@ services:
       - "4571:4571" # Elasticsearch Port
       - "4572:4572" # S3 Port
       - "4574:4574" # Lambda Port
-      - "8080:8080" # Web-UI Port
     environment:
       - SERVICES:s3brew
       - DEBUG=1

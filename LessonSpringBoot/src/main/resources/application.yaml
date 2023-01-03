@@ -23,17 +23,5 @@ management:
 jwt:
   secretKey: secretKeyNika
 
-server:
-  port: 9090
-
-feign:
-  client:
-    config:
-      default:
-        connectTimeout: 5000
-        readTimeout: 5000
-services:
-  user:
-    url: 'http://localhost:9091'
-  messages:
-    url: 'http://localhost:9092
+aws:
+  image-placeholder-path: /path
