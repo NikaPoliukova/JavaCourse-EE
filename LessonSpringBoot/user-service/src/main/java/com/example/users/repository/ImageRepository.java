@@ -1,11 +1,10 @@
-package com.example.lessonSpringBoot.repository;
+package com.example.users.repository;
 
+import com.example.users.model.Image;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
-
-import java.awt.*;
 
 public interface ImageRepository extends Repository<Image, Long> {
 
@@ -21,7 +20,7 @@ public interface ImageRepository extends Repository<Image, Long> {
   String getImageNameByUserId(@Param("userId") long userId);
 
   @Modifying
-  @Query("delete image where user_id=:userId")
-  void deleteImage( @Param("userId") long userId);
+  @Query("delete from image where user_id=:userId")
+  void deleteImage(@Param("userId") long userId);
 }
 

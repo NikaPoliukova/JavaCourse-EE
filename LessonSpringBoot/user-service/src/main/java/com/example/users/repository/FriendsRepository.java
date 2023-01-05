@@ -1,6 +1,6 @@
-package com.example.lessonSpringBoot.repository;
+package com.example.users.repository;
 
-import com.example.lessonSpringBoot.model.User;
+import com.example.users.model.User;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.Repository;

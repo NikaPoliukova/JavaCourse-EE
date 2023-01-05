@@ -1,4 +1,4 @@
-package com.example.lessonSpringBoot.model;
+package com.example.messages.model;
 
 
 import jakarta.persistence.Entity;

@@ -1,8 +1,8 @@
 package com.example.users.controller;
 
-import com.example.lessonSpringBoot.AuthContext;
-import com.example.lessonSpringBoot.model.User;
-import com.example.lessonSpringBoot.service.FriendsServiceImpl;
+import com.example.users.AuthContext;
+import com.example.users.model.User;
+import com.example.users.service.FriendsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.http.MediaType;

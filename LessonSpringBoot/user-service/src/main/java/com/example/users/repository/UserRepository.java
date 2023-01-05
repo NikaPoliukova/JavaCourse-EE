@@ -1,6 +1,6 @@
 package com.example.users.repository;
 
-import com.example.lessonSpringBoot.model.User;
+import com.example.users.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jdbc.repository.query.Modifying;
@@ -24,6 +24,6 @@ public interface UserRepository extends Repository<User, Long> {
 
   @Modifying
   @Query( "update users set username =:userName where user_id =:userId ")
-  User updateUserName(@Param("userName") String userName,@Param("userId") long userId);
+  void updateUserName(@Param("userName") String userName,@Param("userId") long userId);
 }
 

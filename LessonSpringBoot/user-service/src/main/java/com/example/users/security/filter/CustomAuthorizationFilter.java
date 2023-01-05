@@ -1,4 +1,4 @@
-package com.example.lessonSpringBoot.security.filter;
+package com.example.users.security.filter;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.extern.log4j.Log4j2;
@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static com.example.lessonSpringBoot.security.jwt.JwtUtils.getDecodedJWTToken;
+import static com.example.users.security.jwt.JwtUtils.getDecodedJWTToken;
 import static java.util.Arrays.stream;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 

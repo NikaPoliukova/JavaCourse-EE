@@ -1,8 +1,8 @@
-package com.example.lessonSpringBoot.converter;
+package com.example.users.converter;
 
 
-import com.example.lessonSpringBoot.dto.UserDtoRest;
-import com.example.lessonSpringBoot.model.User;
+import com.example.users.dto.UserDtoRest;
+import com.example.users.model.User;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -10,6 +10,4 @@ import java.util.List;
 @Mapper
 public interface UserConverter {
   List<UserDtoRest> toDto(List<User> users);
-
-  UserDtoRest toDto(User user);
 }

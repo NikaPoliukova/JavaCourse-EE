@@ -1,7 +1,7 @@
-package com.example.lessonSpringBoot.service;
+package com.example.users.service;
 
-import com.example.lessonSpringBoot.model.User;
-import com.example.lessonSpringBoot.repository.FriendsRepository;
+import com.example.users.model.User;
+import com.example.users.repository.FriendsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

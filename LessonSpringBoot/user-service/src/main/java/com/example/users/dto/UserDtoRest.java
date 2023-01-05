@@ -1,4 +1,4 @@
-package com.example.lessonSpringBoot.dto;
+package com.example.users.dto;
 
 import lombok.Value;
 

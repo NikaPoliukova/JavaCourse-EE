@@ -1,8 +1,8 @@
-package com.example.lessonSpringBoot.service;
+package com.example.users.service;
 
 
-import com.example.lessonSpringBoot.model.User;
-import com.example.lessonSpringBoot.repository.UserRepository;
+import com.example.users.model.User;
+import com.example.users.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;

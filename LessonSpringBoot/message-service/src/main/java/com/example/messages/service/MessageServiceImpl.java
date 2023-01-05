@@ -1,7 +1,8 @@
-package com.example.lessonSpringBoot.service;
+package com.example.messages.service;
 
-import com.example.lessonSpringBoot.model.Message;
-import com.example.lessonSpringBoot.repository.MessageRepository;
+
+import com.example.messages.repository.MessageRepository;
+import com.example.messages.model.Message;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ public class MessageServiceImpl {
   public void saveMessage(long sourceUserId, long targetUserId, String message_content) {
     messageRepository.saveMessage(sourceUserId, targetUserId, message_content);
   }
-  public List<Message> getMessagesByFriendId(long sourceUserId,  long targetUserId){
+  public List<Message> getMessagesByFriendId(long sourceUserId, long targetUserId){
     return messageRepository.getMessagesByFriendId(sourceUserId, targetUserId);
   }
 }

@@ -1,9 +1,8 @@
-package com.example.lessonSpringBoot.service;
+package com.example.users.service;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 
-import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 
 @Component

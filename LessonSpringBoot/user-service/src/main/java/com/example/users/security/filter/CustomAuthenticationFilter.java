@@ -1,7 +1,7 @@
-package com.example.lessonSpringBoot.security.filter;
+package com.example.users.security.filter;
 
 import com.auth0.jwt.algorithms.Algorithm;
-import com.example.lessonSpringBoot.dto.TokensDto;
+import com.example.users.dto.TokensDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.example.lessonSpringBoot.security.jwt.JwtUtils.generateAccessToken;
-import static com.example.lessonSpringBoot.security.jwt.JwtUtils.generateRefreshToken;
+import static com.example.users.security.jwt.JwtUtils.generateAccessToken;
+import static com.example.users.security.jwt.JwtUtils.generateRefreshToken;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Log4j2

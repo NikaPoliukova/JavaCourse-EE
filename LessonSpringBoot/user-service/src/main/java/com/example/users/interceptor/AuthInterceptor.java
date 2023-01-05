@@ -1,6 +1,6 @@
-package com.example.lessonSpringBoot.interceptor;
+package com.example.users.interceptor;
 
-import com.example.lessonSpringBoot.AuthContext;
+import com.example.users.AuthContext;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.web.servlet.HandlerInterceptor;

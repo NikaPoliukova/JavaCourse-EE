@@ -1,0 +1,46 @@
+server:
+  port: 9090
+
+spring:
+  mvc:
+    static-path-pattern: /static/**
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/social_network
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+jwt:
+  secretKey: secretKeyNika
+
+aws:
+  region: "us-east-1"
+  s3:
+    endpoint: http://LocalStack:4566
+  image-placeholder-path: /static/images/empty.png
+
+feign:
+  client:
+    config:
+      domain:
+        connectTimeout: 5000
+        readTimeout: 3000
+
+services:
+  message:
+    url: 'http://message-service:9091'

@@ -1,10 +1,10 @@
-package com.example.lessonSpringBoot.restControllers;
+package com.example.users.restControllers;
 
-import com.example.lessonSpringBoot.converter.UserConverter;
-import com.example.lessonSpringBoot.dto.TokensDto;
-import com.example.lessonSpringBoot.dto.UserDtoRest;
-import com.example.lessonSpringBoot.model.User;
-import com.example.lessonSpringBoot.service.UserServiceImpl;
+import com.example.users.converter.UserConverter;
+import com.example.users.dto.TokensDto;
+import com.example.users.dto.UserDtoRest;
+import com.example.users.model.User;
+import com.example.users.service.UserServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-import static com.example.lessonSpringBoot.security.jwt.JwtUtils.generateRefreshedAccessToken;
-import static com.example.lessonSpringBoot.security.jwt.JwtUtils.getUsernameFromRefreshToken;
+import static com.example.users.security.jwt.JwtUtils.generateRefreshedAccessToken;
+import static com.example.users.security.jwt.JwtUtils.getUsernameFromRefreshToken;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 

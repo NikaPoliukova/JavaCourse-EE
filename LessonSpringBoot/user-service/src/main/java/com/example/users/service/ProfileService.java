@@ -1,6 +1,6 @@
-package com.example.lessonSpringBoot.service;
+package com.example.users.service;
 
-import com.example.lessonSpringBoot.repository.UserRepository;
+import com.example.users.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

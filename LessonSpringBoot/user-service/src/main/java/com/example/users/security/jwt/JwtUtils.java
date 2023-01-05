@@ -1,4 +1,4 @@
-package com.example.lessonSpringBoot.security.jwt;
+package com.example.users.security.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -39,7 +39,7 @@ public class JwtUtils {
         .withSubject(username)
         .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
         .withIssuer(requestUrl)
-        .withClaim("roles", /*roles.stream().map(Role::getName).collect(Collectors.toList()) */ roles)
+        .withClaim("roles", roles)
         .sign(algorithm);
   }
 
