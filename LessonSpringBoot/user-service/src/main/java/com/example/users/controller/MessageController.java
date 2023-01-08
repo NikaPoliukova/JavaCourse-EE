@@ -28,7 +28,7 @@ public class MessageController {
   }
 
   @PostMapping("/message")
-  public RedirectView saveMessageByFriend(@Valid @ModelAttribute("targetUserId") long targetUserId,
+  public RedirectView saveMessage(@Valid @ModelAttribute("targetUserId") long targetUserId,
                                           @Valid @RequestParam("message") String message) {
     messageClient.saveMessage(authContext.getUserId(), targetUserId, message);
     return new RedirectView("/friends");

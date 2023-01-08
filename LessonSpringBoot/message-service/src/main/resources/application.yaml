@@ -6,4 +6,4 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: postgres
-    url: jdbc:postgresql://postgres:5432/social_network
+    url: jdbc:postgresql://postgres:35432/social_network

@@ -18,7 +18,8 @@ public interface FriendsRepository extends Repository<User, Long> {
       "where (f.source_user_id = :userId or f.target_user_id = :userId) and (f.status = 'APPROVED' or f.status = 'NEW')")
   List<User> getFriendsAndFriendRequests(@Param("userId") long userId);
 
-  @Query(value = "select * from friends f join users u on u.user_id = source_user_id where f.status = 'NEW' and f.target_user_id = :userId")
+  @Query(value = "select * from friends f join users u on u.user_id = source_user_id where f.status = 'NEW' " +
+      "and f.target_user_id = :userId")
   List<User> findIncomingFriendRequests(@Param("userId") long userId);
 
   @Query(value = "select * from friends f join users u on u.user_id = target_user_id " +

@@ -1,7 +1,6 @@
 package com.example.messages.repository;
 
 
-import com.example.messages.dto.MessageDto;
 import com.example.messages.model.Message;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
@@ -10,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface MessageRepository extends Repository<MessageDto, Long> {
+public interface MessageRepository extends Repository<Message, Long> {
   @Modifying
   @Query("insert into messages (source_user_id, target_user_id, message_content) " +
       "VALUES (:sourceUserId, :targetUserId, :message_content)")

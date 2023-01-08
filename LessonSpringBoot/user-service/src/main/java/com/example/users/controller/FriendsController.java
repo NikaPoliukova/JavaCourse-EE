@@ -4,7 +4,6 @@ import com.example.users.AuthContext;
 import com.example.users.model.User;
 import com.example.users.service.FriendsServiceImpl;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,7 +26,6 @@ public class FriendsController {
   private final AuthContext authContext;
   private final FriendsServiceImpl friendsService;
 
-  @SneakyThrows
   @GetMapping
   public String getAllFriends(final ModelMap model) {
     List<User> friends = friendsService.getFriendsByUserIdAndStatus(authContext.getUserId());
@@ -36,7 +34,6 @@ public class FriendsController {
     return "friends";
   }
 
-  @SneakyThrows
   @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
   public RedirectView cancelFriendRequest(@Valid @RequestParam("targetUserId") long targetUserId) {
     friendsService.cancelFriendship(authContext.getUserId(), targetUserId);

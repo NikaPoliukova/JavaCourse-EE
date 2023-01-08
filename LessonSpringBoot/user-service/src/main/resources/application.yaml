@@ -8,7 +8,7 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: postgres
     password: postgres
-    url: jdbc:postgresql://localhost:5432/social_network
+    url: jdbc:postgresql://localhost:35432/social_network
   jpa:
     properties:
       hibernate:
@@ -44,3 +44,4 @@ feign:
 services:
   message:
     url: 'http://message-service:9091'
+
