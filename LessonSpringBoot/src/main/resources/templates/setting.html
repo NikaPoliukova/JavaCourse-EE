@@ -19,19 +19,6 @@
             border: 1px solid #ddd;
         }
 
-        .button {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-
         th, td {
             text-align: left;
             padding: 16px;
@@ -43,12 +30,6 @@
 
         body {
             background-color: #F0F8FF;
-        }
-
-        .navbar {
-            width: 100%;
-            background-color: #555;
-            overflow: auto;
         }
 
         .navbar a {
@@ -78,10 +59,6 @@
             }
         }
 
-        .pagination {
-            display: inline-block;
-        }
-
         .pagination a {
             color: black;
             float: left;
@@ -99,8 +76,18 @@
             background-color: #ddd;
             border-radius: 5px;
         }
+
         .btn {
             background-color: #2196F3;
+            color: white;
+            padding: 8px;
+            font-size: 12px;
+            border: none;
+            outline: none;
+        }
+
+        .btn2 {
+            background-color: indianred;
             color: white;
             padding: 8px;
             font-size: 12px;
@@ -128,7 +115,9 @@
             display: block;
         }
 
-        .dropdown-content a:hover {background-color: #ddd}
+        .dropdown-content a:hover {
+            background-color: #ddd
+        }
 
         .dropdown:hover .dropdown-content {
             display: block;
@@ -153,12 +142,22 @@
                     <table id="customers">
                         <tr th:value="${user}">
                             <td style="min-width:50px;"> Profile image</td>
-                           <td>
-                               <form action="#" th:action="@{/setting-image}" method="post">
-                                   <input type="hidden" th:value="${user.getUserId()}" name="userId"/>
-                                   <input type="submit" class="btn" value="change">
-                               </form>
-                           </td>
+                            <td>
+                                <form action="#" th:action="@{/setting-correct-image}" enctype="multipart/form-data"
+                                      method="post">
+                                    <input type="hidden" th:value="${user.getUserId()}" name="userId"/>
+                                    <div class="file-upload-wrapper">
+                                        <input id="file" name="file" type="file" accept=".gif,.jpg,.jpeg,.png">
+                                        <input type="submit" class="btn" value="upload image">
+                                    </div>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="#" th:action="@{/setting-delete-image}" method="post">
+                                    <input type="hidden" th:value="${user.getUserId()}" name="userId"/>
+                                    <input type="submit" class="btn2" value="delete curently image">
+                                </form>
+                            </td>
                         </tr>
                         <tr th:value="${user}">
                             <td style="min-width:50px;">Id user</td>
@@ -167,18 +166,28 @@
                         <tr th:value="${user}">
                             <td style="min-width:50px;">Username</td>
                             <td th:text="${user.getUserName}"></td>
-                            <td><input type="text" id="cname" name="cardname" placeholder="enter for change"><button type="submit" class="registerbtn">change</button> </td>
+                            <td>
+                                <form action="#" th:action="@{/setting-correct-name}" method="post">
+                                    <input type="hidden" th:value="${user.getUserId()}" name="userId"/>
+                                    <input type="text" name="userName" placeholder="enter for change"/>
+                                    <button type="submit" class="btn">change</button>
+                                </form>
+                            </td>
                         </tr>
                         <tr>
                             <td style="min-width:50px;">Age</td>
                             <td style="min-width:50px;">15</td>
-                            <td><input type="text" id="cname" name="cardname" placeholder="enter for change"><button type="submit" class="registerbtn">change</button> </td>
+                            <td>
+                                <input type="text" name="cardname" placeholder="enter for change">
+                                <button type="submit" class="btn">change</button>
+                            </td>
 
                         </tr>
                         <tr>
                             <td style="min-width:50px;">Gender</td>
-                            <td style="min-width:50px;">female </td>
-                            <td><button class="btn">change</button>
+                            <td style="min-width:50px;">female</td>
+                            <td>
+                                <button class="btn">change</button>
                                 <div class="dropdown">
                                     <button class="btn" style="border-left:1px solid #0d8bf2">
                                         <i class="fa fa-caret-down"></i>
@@ -189,12 +198,13 @@
                                     </div>
                                 </div>
                             </td>
-
                         </tr>
                         <tr>
                             <td style="min-width:50px;">Country</td>
-                            <td style="min-width:50px;">Italy </td>
-                            <td><input type="text" id="cname" name="cardname" placeholder="enter for change"> <button type="submit" class="registerbtn">change</button></td>
+                            <td style="min-width:50px;">Italy</td>
+                            <td><input type="text" id="cname" name="cardname" placeholder="enter for change">
+                                <button type="submit" class="btn">change</button>
+                            </td>
                         </tr>
                     </table>
                 </div>

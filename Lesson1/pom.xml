@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.teachmeskills</groupId>
-    <artifactId>JavaCourse-EE</artifactId>
+    <artifactId>Lesson1</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>servlet</name>
 

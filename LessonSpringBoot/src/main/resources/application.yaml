@@ -22,3 +22,6 @@ management:
         include: '*'
 jwt:
   secretKey: secretKeyNika
+
+aws:
+  image-placeholder-path: /path

@@ -16,12 +16,14 @@ public interface UserRepository extends Repository<User, Long> {
   @Query(value = "insert into users (username, password) VALUES (:userName, :password)")
   void addUser(@Param("userName") String userName, @Param("password") String password);
 
-  void save(User user);
-
   Page<User> findUsersByUserNameStartingWith(String searchValue, Pageable page);
 
   User findUserByUserName(@Param("userName") String userName);
 
   User findUserByUserId(long targetUserId);
+
+  @Modifying
+  @Query( "update users set username =:userName where user_id =:userId ")
+  void updateUserName(@Param("userName") String userName,@Param("userId") long userId);
 }
 

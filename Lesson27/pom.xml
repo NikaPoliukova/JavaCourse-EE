@@ -8,29 +8,37 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>Lesson27</artifactId>
-    <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-pmd-plugin</artifactId>
-        <version>${pmd.maven.plugin.version}</version>
-        <configuration>
-            <linkXRef>false</linkXRef>
-            <sourceEncoding>UTF-8</sourceEncoding>
-            <includeTests>false</includeTests>
-            <failurePriority>${pmd.failurePriority}</failurePriority>
-            <failOnViolation>true</failOnViolation>
-        </configuration>
-        <executions>
-            <execution>
-                <id>pmd-validate</id>
-                <phase>validate</phase>
-                <goals>
-                    <goal>check</goal>
-                </goals>
-            </execution>
-        </executions>
-    </plugin>
+
+    <properties>
+        <pmd.maven.plugin.version>3.19.0</pmd.maven.plugin.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>${pmd.maven.plugin.version}</version>
+                <configuration>
+                    <linkXRef>false</linkXRef>
+                    <sourceEncoding>UTF-8</sourceEncoding>
+                    <includeTests>false</includeTests>
+                    <failurePriority>${pmd.failurePriority}</failurePriority>
+                    <failOnViolation>true</failOnViolation>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>pmd-validate</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>

@@ -2,7 +2,7 @@ version: "3"
 services:
   postgres:
     image: "postgres:13.4-alpine"
-    container_name: "postgres"
+    container_name: "demo-postgres"
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
@@ -15,11 +15,14 @@ services:
     image: localstack/localstack:latest
     ports:
       - "4566:4566" # Edge Port
+      - "4569:4569" # Dynamo DB Port
+      - "4571:4571" # Elasticsearch Port
       - "4572:4572" # S3 Port
+      - "4574:4574" # Lambda Port
     environment:
-      - SERVICES:s3
+      - SERVICES:s3brew
       - DEBUG=1
-      - DATA_DIR=/tmp/localstack/data
       - DOCKER_HOST=unix:///var/run/docker.sock
+      - DATA_DIR=/tmp/localstack/data
     volumes:
-      - ./scripts/localstack:/docker-entrypoint-initaws.d
+      - ./localstack:/docker-entrypoint-initaws.d
