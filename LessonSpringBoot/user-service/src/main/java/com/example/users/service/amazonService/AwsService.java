@@ -22,20 +22,20 @@ public class AwsService {
   private String placeholderPath;
 
   public void uploadFile(InputStream stream, String fileName) {
-    PutObjectRequest request = new PutObjectRequest("bucket1", fileName, stream, new ObjectMetadata());
+    PutObjectRequest request = new PutObjectRequest("imgbucket", fileName, stream, new ObjectMetadata());
     client.putObject(request);
   }
 
   public URI getImagePath(String imageName) throws URISyntaxException {
-    if (client.doesObjectExist("bucket1", imageName)) {
-      GetObjectRequest request = new GetObjectRequest("bucket1", imageName);
+    if (client.doesObjectExist("imgbucket", imageName)) {
+      GetObjectRequest request = new GetObjectRequest("imgbucket", imageName);
       return client.getObject(request).getObjectContent().getHttpRequest().getURI();
     }
     return new URI(placeholderPath);
   }
 
   public void deleteImage(String oldImage) {
-    DeleteObjectRequest request = new DeleteObjectRequest("bucket1", oldImage);
+    DeleteObjectRequest request = new DeleteObjectRequest("imgbucket", oldImage);
     client.deleteObject(request);
   }
 }

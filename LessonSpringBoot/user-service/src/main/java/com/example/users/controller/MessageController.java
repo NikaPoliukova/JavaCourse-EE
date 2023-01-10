@@ -1,8 +1,8 @@
 package com.example.users.controller;
 
 import com.example.users.AuthContext;
-import com.example.users.model.Message;
 import com.example.users.client.MessageClient;
+import com.example.users.model.Message;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,14 +27,14 @@ public class MessageController {
     return "form_for_send_message";
   }
 
-  @PostMapping("/message")
+  @PostMapping(value ="/message")
   public RedirectView saveMessage(@Valid @ModelAttribute("targetUserId") long targetUserId,
                                           @Valid @RequestParam("message") String message) {
     messageClient.saveMessage(authContext.getUserId(), targetUserId, message);
     return new RedirectView("/friends");
   }
 
-  @PostMapping("/chat-with-friend")
+  @PostMapping(value = "/chat-with-friend")
   protected String getMessagesByFriend(Model model, @Valid @RequestParam("targetUserId") long targetUserId) {
     List<Message> listMessages = messageClient.getMessagesByFriend(authContext.getUserId(), targetUserId);
     model.addAttribute("listMessages", listMessages);

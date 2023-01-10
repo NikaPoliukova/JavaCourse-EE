@@ -1,10 +1,10 @@
 package com.example.users.controller;
 
 
+import com.example.users.model.User;
 import com.example.users.service.ImageService;
 import com.example.users.service.ProfileService;
 import com.example.users.service.UserServiceImpl;
-import com.example.users.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,9 +42,11 @@ public class SettingController {
   }
 
   @PostMapping("/setting-correct-image")
-  protected String updateImageInProfile(@Valid @RequestParam("userId") long userId,
+  protected String updateImageInProfile(Model model,@Valid @RequestParam("userId") long userId,
                                         @RequestParam(required = false, name = "file") MultipartFile file
   ) throws IOException {
+    User user = userService.findUserByUserId(userId);
+    model.addAttribute("user", user);
     profileService.addNewProfileImage(userId, file);
     return "setting";
   }
@@ -54,4 +56,5 @@ public class SettingController {
     imageService.deleteImage(userId);
     return "setting";
   }
+
 }

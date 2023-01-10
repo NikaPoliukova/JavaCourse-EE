@@ -1,14 +1,17 @@
 package com.example.users.model;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Value;
+import lombok.extern.jackson.Jacksonized;
 
 import java.time.LocalDateTime;
 
-@Entity
+@Value
+@Builder
+@Jacksonized
 @Table(name = "messages")
-@Data
+
 public class Message {
   Long sourceUserId;
   Long targetUserId;

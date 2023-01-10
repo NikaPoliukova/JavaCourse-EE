@@ -20,20 +20,19 @@ logging:
       hibernate:
         type: trace
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
 jwt:
   secretKey: secretKeyNika
 
 aws:
   region: "us-east-1"
   s3:
-    endpoint: http://LocalStack:4566
+    endpoint: http://Localhost:4566
   image-placeholder-path: /static/images/empty.png
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 feign:
   client:
     config:
@@ -43,5 +42,5 @@ feign:
 
 services:
   message:
-    url: 'http://message-service:9091'
+    url: "http://localhost:9091"
 

@@ -15,15 +15,15 @@ public class ProfileService {
 
   public void addNewProfileImage(long userId, MultipartFile file) throws IOException {
     String imageName = imageService.getImageNameByUserId(userId);
-    imageService.upload(file.getInputStream(), file.getOriginalFilename());
-    if (!imageName.isEmpty()) {
+    if (imageName != null) {
       imageService.updateImage(file.getOriginalFilename(), userId);
     } else {
       imageService.setNewImage(file.getOriginalFilename(), userId);
     }
+    imageService.upload(file.getInputStream(), file.getOriginalFilename());
   }
 
- public void updateUserName (String userName, long userId){
-    userRepository.updateUserName(userName,userId);
- }
+  public void updateUserName(String userName, long userId) {
+    userRepository.updateUserName(userName, userId);
+  }
 }

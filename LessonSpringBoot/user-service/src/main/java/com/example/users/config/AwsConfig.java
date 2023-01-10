@@ -21,7 +21,6 @@ public class AwsConfig {
     BasicAWSCredentials credentials = new BasicAWSCredentials("foo", "bar");
     AwsClientBuilder.EndpointConfiguration client =
         new AwsClientBuilder.EndpointConfiguration(endpointUrl, region);
-
     AmazonS3ClientBuilder builder = AmazonS3ClientBuilder.standard()
         .withEndpointConfiguration(client)
         .withPathStyleAccessEnabled(true)

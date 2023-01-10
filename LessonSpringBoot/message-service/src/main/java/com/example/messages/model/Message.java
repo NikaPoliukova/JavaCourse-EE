@@ -1,15 +1,13 @@
 package com.example.messages.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Value;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "messages")
-@Data
+@Value
+@Builder
 public class Message {
   Long sourceUserId;
   Long targetUserId;

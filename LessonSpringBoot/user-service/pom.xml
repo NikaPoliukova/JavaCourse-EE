@@ -127,6 +127,7 @@
             <artifactId>feign-httpclient</artifactId>
             <version>${feign.httpclient}</version>
         </dependency>
+
     </dependencies>
     <dependencyManagement>
         <dependencies>
