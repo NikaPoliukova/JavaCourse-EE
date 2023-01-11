@@ -17,7 +17,7 @@ public class MessageRestController {
 
   private final MessageServiceImpl messageService;
 
-  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, path = "/message")
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE, path = "/message")
   protected void saveMessage(@RequestParam long myUserId, @RequestParam long targetUserId, @RequestParam String message) {
     messageService.saveMessage(myUserId, targetUserId, message);
   }

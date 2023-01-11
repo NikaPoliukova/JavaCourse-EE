@@ -13,10 +13,10 @@ import java.util.List;
 @FeignClient(name = "domain", url = "${services.message.url}")
 public interface MessageClient {
 
-  @RequestMapping(method = RequestMethod.POST, value = "/message")
-  String saveMessage(long myUserId, @RequestParam("targetUserId") long targetUserId,
+  @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/message")
+  String saveMessage(@RequestParam("myUserId") long myUserId, @RequestParam("targetUserId") long targetUserId,
                      @RequestParam("message") String message);
 
-  @RequestMapping(method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE, value = "/chat-with-friend")
-  List<Message> getMessagesByFriend(@RequestParam("myUserId")long myUserId, @RequestParam("targetUserId") long targetUserId);
+  @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/chat-with-friend")
+  List<Message> getMessagesByFriend(@RequestParam("myUserId") long myUserId, @RequestParam("targetUserId") long targetUserId);
 }
