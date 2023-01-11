@@ -15,10 +15,7 @@ services:
     image: localstack/localstack:latest
     ports:
       - "4566:4566" # Edge Port
-      - "4569:4569" # Dynamo DB Port
-      - "4571:4571" # Elasticsearch Port
       - "4572:4572" # S3 Port
-      - "4574:4574" # Lambda Port
     environment:
       - SERVICES:s3brew
       - DEBUG=1
