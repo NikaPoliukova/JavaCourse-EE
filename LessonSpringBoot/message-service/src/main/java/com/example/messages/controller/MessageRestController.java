@@ -26,4 +26,5 @@ public class MessageRestController {
   protected List<Message> getMessagesByFriend(@RequestParam long myUserId, @RequestParam long targetUserId) {
     return messageService.getMessagesByFriendId(myUserId, targetUserId);
   }
+
 }
