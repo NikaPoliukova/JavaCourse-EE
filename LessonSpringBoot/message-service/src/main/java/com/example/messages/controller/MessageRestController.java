@@ -22,8 +22,8 @@ public class MessageRestController {
     messageService.saveMessage(myUserId, targetUserId, message);
   }
 
-  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE,path = "/chat-with-friend")
-  protected List<Message> getMessagesByFriend(@RequestParam long myUserId, @RequestParam long targetUserId) {
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,path = "/chat-with-friend")
+  protected List<Message> getMessagesByFriend(long myUserId, @RequestParam long targetUserId) {
     return messageService.getMessagesByFriendId(myUserId, targetUserId);
   }
 
