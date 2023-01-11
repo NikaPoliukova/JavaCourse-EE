@@ -27,6 +27,7 @@ public class MvcConfig implements WebMvcConfigurer {
     registry.addViewController("/form-for-send-message").setViewName("form-for-send-message");
     registry.addViewController("/chat-with-friend").setViewName("chat-with-friend");
     registry.addViewController("/profile").setViewName("profile");
+
   }
 
   @Override
