@@ -2,13 +2,11 @@ package com.example.users.config;
 
 
 import com.example.users.AuthContext;
-import com.example.users.interceptor.AuthInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.handler.MappedInterceptor;
 
 @Configuration
 @RequiredArgsConstructor
@@ -30,11 +28,16 @@ public class MvcConfig implements WebMvcConfigurer {
 
   }
 
-  @Override
+ /* @Override
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(new MappedInterceptor(new String[]{"/users", "/friends", "/incoming-friend-requests",
         "/outgoing-friend-requests", "/chat-with-friend", "/form-for-send-message", "/profile",
         "/setting-information", "/setting-correct-name", "/setting-correct-image", "/setting-delete-image"},
         new AuthInterceptor(authContext)));
+  }*/
+
+  @Override
+  public void addCorsMappings(CorsRegistry registry) {
+    registry.addMapping("/**").allowedOrigins("*");
   }
 }

@@ -11,8 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static org.springframework.http.HttpMethod.GET;
-
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -29,7 +27,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     http.authorizeRequests().antMatchers("/api/v1/login").permitAll();
 
 
-    http.authorizeRequests().antMatchers(GET, "/api/**").hasAuthority("USER");
+    //http.authorizeRequests().antMatchers(GET, "/api/**").hasAuthority("USER");
     http.authorizeRequests().antMatchers("/**").permitAll();
     http.addFilter(customAuthenticationFilter);
     http.addFilterBefore(new CustomAuthorizationFilter(secretKey), UsernamePasswordAuthenticationFilter.class);

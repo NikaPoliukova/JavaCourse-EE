@@ -29,7 +29,7 @@ public class ProfileController {
 
   @PostMapping
   protected String showProfile(Model model, @Valid @RequestParam("userId") long userId) throws URISyntaxException {
-    User user = userService.findUserByUserId(userId);
+    User user = userService.findUser(userId);
     String imageName = imageService.getImageNameByUserId(userId);
     URI imageUrl = null;
     if (imageName != null) {
@@ -45,7 +45,7 @@ public class ProfileController {
   @GetMapping
   protected String myProfile(Model model) throws URISyntaxException {
     long authorizationUserId = authContext.getUserId();
-    User user = userService.findUserByUserId(authorizationUserId);
+    User user = userService.findUser(authorizationUserId);
     String imageName = imageService.getImageNameByUserId(authorizationUserId);
     URI imageUrl = null;
     if (imageName != null) {

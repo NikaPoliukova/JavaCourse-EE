@@ -21,7 +21,7 @@ public class UserServiceImpl {
   private final HashPassServiceImpl hashPassService;
   private final PasswordEncoder passwordEncoder;
 
-  public Page<User> getFilteredUsers(String searchValue, int pageNumber, int pageSize) {
+  public Page<User> filterUsers(String searchValue, int pageNumber, int pageSize) {
     Pageable page = PageRequest.of(pageNumber, pageSize);
     if (searchValue != null) {
       return userRepository.findUsersByUserNameStartingWith(searchValue, page);
@@ -39,7 +39,7 @@ public class UserServiceImpl {
     userRepository.addUser(userName, hashPass);
   }
 
-  public User findUserByUserNameAndPassword(String name, String password) {
+  public User findUser(String name, String password) {
     User user = userRepository.findUserByUserName(name);
     if (user != null && hashPassService.verify(password, user.getPassword())) {
       return user;
@@ -48,7 +48,7 @@ public class UserServiceImpl {
     }
   }
 
-  public User findUserByUserId(long targetUserId) {
+  public User findUser(long targetUserId) {
     return userRepository.findUserByUserId(targetUserId);
   }
 }
