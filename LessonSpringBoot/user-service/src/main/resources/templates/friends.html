@@ -148,7 +148,7 @@
                                 </form>
                             </td>
                             <td>
-                                <form action="#" th:action="@{/chat-with-friend}" method="post">
+                                <form action="#" th:action="@{/messages}" method="post">
                                     <input type="hidden" th:value="${friend.getUserId()}" name="targetUserId"/>
                                     <button type='submit' class="button3">Messages</button>
                                 </form>
