@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Optional;
 
 @Validated
 @Controller
@@ -30,10 +31,10 @@ public class ProfileController {
   @PostMapping
   protected String showProfile(Model model, @Valid @RequestParam("userId") long userId) throws URISyntaxException {
     User user = userService.findUserByUserId(userId);
-    String imageName = imageService.getImageNameByUserId(userId);
+    Optional<String> imageName =  imageService.getImageNameByUserId(userId);
     URI imageUrl = null;
-    if (imageName != null) {
-      imageUrl = imageService.getImagePath(imageName);
+    if (imageName.isPresent()) {
+      imageUrl = imageService.getImagePath(imageName.get());
     }
     long authorizationUserId = authContext.getUserId();
     model.addAttribute("user", user);
@@ -46,10 +47,10 @@ public class ProfileController {
   protected String myProfile(Model model) throws URISyntaxException {
     long authorizationUserId = authContext.getUserId();
     User user = userService.findUserByUserId(authorizationUserId);
-    String imageName = imageService.getImageNameByUserId(authorizationUserId);
+    Optional<String> imageName = imageService.getImageNameByUserId(authorizationUserId);
     URI imageUrl = null;
-    if (imageName != null) {
-      imageUrl = imageService.getImagePath(imageName);
+    if (imageName.isPresent()) {
+      imageUrl = imageService.getImagePath(imageName.get());
     }
     model.addAttribute("user", user);
     model.addAttribute("imageUrl", imageUrl);

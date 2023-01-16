@@ -34,7 +34,7 @@ public class MessageController {
     return new RedirectView("/friends");
   }
 
-  @PostMapping(value = "/chat-with-friend")
+  @PostMapping(value = "/messages")
   protected String getMessagesByFriend(Model model, @Valid @RequestParam("targetUserId") long targetUserId) {
     List<Message> listMessages = messageClient.getMessagesByFriend(authContext.getUserId(), targetUserId);
     model.addAttribute("listMessages", listMessages);

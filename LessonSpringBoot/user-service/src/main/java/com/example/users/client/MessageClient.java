@@ -17,6 +17,6 @@ public interface MessageClient {
   String saveMessage(@RequestParam("myUserId") long myUserId, @RequestParam("targetUserId") long targetUserId,
                      @RequestParam("message") String message);
 
-  @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/chat-with-friend")
+  @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, value = "/messages")
   List<Message> getMessagesByFriend(@RequestParam("myUserId") long myUserId, @RequestParam("targetUserId") long targetUserId);
 }
