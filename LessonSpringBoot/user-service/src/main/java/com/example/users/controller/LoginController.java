@@ -34,7 +34,7 @@ public class LoginController {
 
   @PostMapping
   protected RedirectView userAuthorization(Model model, @Valid @ModelAttribute("dto") UserDto dto) {
-    User user = userService.findUserByUserNameAndPassword(dto.getUserName(), dto.getPassword());
+    User user = userService.findUser(dto.getUserName(), dto.getPassword());
     Long userId = user.getUserId();
     model.addAttribute("userId", userId);
     model.addAttribute("userName", dto.getUserName());

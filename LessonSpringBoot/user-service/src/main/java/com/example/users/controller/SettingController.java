@@ -27,7 +27,7 @@ public class SettingController {
 
   @PostMapping("/setting-information")
   protected String showSettingProfile(Model model, @Valid @RequestParam("userId") long userId) {
-    User user = userService.findUserByUserId(userId);
+    User user = userService.findUser(userId);
     model.addAttribute("user", user);
     return "setting";
   }
@@ -35,7 +35,7 @@ public class SettingController {
   @PostMapping("/setting-correct-name")
   protected String updateNameInProfile(Model model, @RequestParam("userId") long userId,
                                        @RequestParam(required = false, name = "userName") String userName) {
-    User user = userService.findUserByUserId(userId);
+    User user = userService.findUser(userId);
     profileService.updateUserName(userName, userId);
     model.addAttribute("user", user);
     return "setting";
@@ -45,7 +45,7 @@ public class SettingController {
   protected String updateImageInProfile(Model model,@Valid @RequestParam("userId") long userId,
                                         @RequestParam(required = false, name = "file") MultipartFile file
   ) throws IOException {
-    User user = userService.findUserByUserId(userId);
+    User user = userService.findUser(userId);
     model.addAttribute("user", user);
     profileService.addNewProfileImage(userId, file);
     return "setting";

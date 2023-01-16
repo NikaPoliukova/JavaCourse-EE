@@ -36,7 +36,7 @@ public class UserController {
   public String findAllUsersByPageAndSearch(final ModelMap model, @RequestParam(name = "searchValue", required = false) String searchValue,
                                             @RequestParam(value = "pageNumber", required = false, defaultValue = "1") Integer pageNumber,
                                             @RequestParam(value = "pageSize", required = false, defaultValue = "5") Integer pageSize) {
-    Page<User> page = userService.getFilteredUsers(searchValue, pageNumber - 1, pageSize);
+    Page<User> page = userService.filterUsers(searchValue, pageNumber - 1, pageSize);
     List<User> users = page.getContent();
     model.addAttribute("currentPage", pageNumber);
     model.addAttribute("totalItems", page.getTotalElements());

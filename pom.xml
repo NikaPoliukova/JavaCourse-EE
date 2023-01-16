@@ -12,6 +12,7 @@
         <module>Lesson2</module>
         <module>Lesson27</module>
         <module>LessonSpringBoot</module>
+        <module>lesson_42</module>
     </modules>
     <packaging>pom</packaging>
 
