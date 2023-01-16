@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +24,7 @@ public class ImageService {
     imageRepository.updateImage(imageName, userId);
   }
 
-  public String getImageNameByUserId(long userId) {
+  public Optional<String> getImageNameByUserId(long userId) {
     return imageRepository.getImageNameByUserId(userId);
   }
 
@@ -36,8 +37,8 @@ public class ImageService {
   }
 
   public void deleteImage(long userId) {
-    String imageName = imageRepository.getImageNameByUserId(userId);
-    storageService.deleteImage(imageName);
+    Optional<String> imageName = imageRepository.getImageNameByUserId(userId);
+    storageService.deleteImage(imageName.get());
     imageRepository.deleteImage(userId);
   }
 }

@@ -1,6 +1,5 @@
 package com.example.users.config;
 
-
 import com.example.users.AuthContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -25,16 +24,15 @@ public class MvcConfig implements WebMvcConfigurer {
     registry.addViewController("/form-for-send-message").setViewName("form-for-send-message");
     registry.addViewController("/chat-with-friend").setViewName("chat-with-friend");
     registry.addViewController("/profile").setViewName("profile");
-
   }
 
- /* @Override
+ @Override
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(new MappedInterceptor(new String[]{"/users", "/friends", "/incoming-friend-requests",
-        "/outgoing-friend-requests", "/chat-with-friend", "/form-for-send-message", "/profile",
+        "/outgoing-friend-requests", "/messages", "/form-for-send-message", "/profile",
         "/setting-information", "/setting-correct-name", "/setting-correct-image", "/setting-delete-image"},
         new AuthInterceptor(authContext)));
-  }*/
+  }
 
   @Override
   public void addCorsMappings(CorsRegistry registry) {
